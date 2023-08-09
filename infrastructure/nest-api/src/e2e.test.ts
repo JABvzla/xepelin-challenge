@@ -7,7 +7,7 @@ import { RegisterDTO } from './dtos/register.dto';
 import { AccountDTO } from './dtos/account.dto';
 import { TransactionDTO } from './dtos/transaction.dto';
 
-describe('[infrastructure/nestjs-api]', () => {
+describe('[Infrastructure] e2e-nestjs-api', () => {
   let app: INestApplication;
 
   beforeAll(async () => {

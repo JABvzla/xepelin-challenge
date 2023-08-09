@@ -9,7 +9,7 @@ interface TestModel {
 }
 
 
-describe("memoryRepositoryFactory", () => {
+describe("[Infrastructure] memoryRepositoryFactory", () => {
   let repository: Repository<TestModel>
   const initialTestData: TestModel[] = [
     { id: "1", name: "Model 1" },
