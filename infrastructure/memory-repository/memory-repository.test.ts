@@ -1,6 +1,6 @@
 import { describe, beforeEach, expect, test } from "@jest/globals"
-import { Repository } from "../domain/generics"
-import { memoryRepositoryFactory } from "../infrastructure/memory-repository"
+import { Repository } from "../../domain/generics"
+import { memoryRepositoryFactory } from "./index"
 
 // Mocked data and models for testing
 interface TestModel {

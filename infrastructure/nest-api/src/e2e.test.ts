@@ -113,7 +113,7 @@ describe('[infrastructure/nestjs-api]', () => {
       });
     });
   });
-  describe.only('[transaction]', () => {
+  describe('[transaction]', () => {
     test(`/POST create DEPOSIT transaction`, async () => {
       // Arrange
       const userWithAccount: RegisterDTO = {

@@ -1,4 +1,4 @@
-import { Id, Repository } from "../domain/generics"
+import { Id, Repository } from "../../domain/generics"
 
 const MODEL_NOT_FOUND = (id) => `Id ${id} Not Found`
 

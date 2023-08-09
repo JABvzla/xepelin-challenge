@@ -4,8 +4,7 @@
   "description": "fullstack challenge by JABvzla",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
-    "test:nest-api": "npm run --prefix ./infrastructure/nest-api test:watch"
+    "test": "jest"
   },
   "author": "JABvzla",
   "license": "ISC",
