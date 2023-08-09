@@ -1,4 +1,4 @@
-import { Transaction, TransactionRepository } from "domain/transaction"
+import { Transaction, TransactionRepository } from "../domain/transaction"
 import { Account, AccountRepository } from "../domain/account"
 import { User, UserRepository } from "../domain/user"
 

@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { createAccount as applicationCreateAccount } from './../../../application/create-account';
+import { createTransaction as applicationCreateTransaction } from './../../../application/create-transaction';
 import { Account } from './../../../domain/account';
 import { Auth } from './../../../domain/auth';
 import { Repository } from './../../../domain/generics';
@@ -55,13 +56,6 @@ export class AppService {
     });
     return;
   }
-  async createAccount(request: AccountDTO) {
-    return applicationCreateAccount(
-      request,
-      this.userRepository,
-      this.accountRepository,
-    );
-  }
   async createUser(request: RegisterDTO) {
     const { name, username, password } = request;
     const usernameExist = await this.authModel.exists({ username });
@@ -77,32 +71,20 @@ export class AppService {
       password: '',
     };
   }
+  async createAccount(request: AccountDTO) {
+    return applicationCreateAccount(
+      request,
+      this.userRepository,
+      this.accountRepository,
+    );
+  }
   async createTransaction(request: TransactionDTO) {
-    const { amount, type, userId } = request;
-    const user = await this.userModel.findOne({ _id: userId });
-    if (!user?._id) {
-      throw new HttpException("user doesn't exist", HttpStatus.BAD_REQUEST);
-    }
-    if (!user.accounts?.length) {
-      throw new HttpException('user without account', HttpStatus.BAD_REQUEST);
-    }
-    const accountId = user.accounts[0];
-    const newTransaction = await this.transactionModel.create({
-      account: accountId,
-      amount,
-      type,
-    });
-    await this.accountModel.findByIdAndUpdate(accountId, {
-      $push: { transaction: newTransaction._id },
-    });
-
-    return {
-      id: newTransaction._id,
-      userId,
-      amount: newTransaction.amount,
-      type: newTransaction.type,
-      createdAt: newTransaction.createdAt,
-    };
+    return applicationCreateTransaction(
+      request,
+      this.userRepository,
+      this.transactionRepository,
+      this.accountRepository,
+    );
   }
 
   getUser() {

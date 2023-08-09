@@ -5,7 +5,7 @@ import { User } from '../../../../domain/user';
 type UserId = User['id'];
 export class TransactionDTO {
   id?: Id;
-  userId?: UserId;
+  userId: UserId;
   amount: USD;
   type: TransactionType;
   createdAt?: Date;
