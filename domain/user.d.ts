@@ -5,7 +5,7 @@ import { Id, Repository } from "./generics"
 export interface User {
   id: Id
   name: string
-  auth: Auth[]
+  auth: Auth["id"][]
   accounts: Account["id"][]
 }
 export interface UserRepository extends Repository<User> {}
