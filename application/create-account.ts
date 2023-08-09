@@ -16,7 +16,7 @@ export async function createAccount(
   if (!user) {
     return "user doesn't exist"
   }
-  if (user.accounts.length) {
+  if (user?.accounts?.length) {
     return "user already has an account created"
   }
 
@@ -30,7 +30,6 @@ export async function createAccount(
     accounts: [newAccount.id],
   }
   await userRepository.update(user.id, newUserData)
-
   return {
     userId: user.id,
     id: newAccount.id,

@@ -1,6 +1,6 @@
-import { Account } from '@xepelin/domain/account';
-import { USD } from '@xepelin/domain/generics';
-import { User } from '@xepelin/domain/user';
+import { Account } from '../../../../domain/account';
+import { USD } from '../../../../domain/generics';
+import { User } from '../../../../domain/user';
 
 type AccountId = Account['id'];
 type UserId = User['id'];

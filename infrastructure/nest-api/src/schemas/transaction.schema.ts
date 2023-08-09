@@ -1,8 +1,8 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Transaction, TransactionType } from '@xepelin/domain/transaction';
-import { Date, Id, USD } from '@xepelin/domain/generics';
-import { Account } from '@xepelin/domain/account';
+import { Transaction, TransactionType } from '../../../../domain/transaction';
+import { Date, Id, USD } from '../../../../domain/generics';
+import { Account } from '../../../../domain/account';
 
 type AccountId = Account['id'];
 

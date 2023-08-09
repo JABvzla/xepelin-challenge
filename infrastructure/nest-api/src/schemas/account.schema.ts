@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Account } from '@xepelin/domain/account';
-import { Id, USD } from '@xepelin/domain/generics';
-import { Transaction } from '@xepelin/domain/transaction';
+import { Account } from '../../../../domain/account';
+import { Id, USD } from '../../../../domain/generics';
+import { Transaction } from '../../../../domain/transaction';
 import { Document } from 'mongoose';
 
 @Schema({ collection: 'accounts ' })

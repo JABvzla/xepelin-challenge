@@ -1,6 +1,6 @@
-import { Id, USD } from '@xepelin/domain/generics';
-import { TransactionType } from '@xepelin/domain/transaction';
-import { User } from '@xepelin/domain/user';
+import { Id, USD } from '../../../../domain/generics';
+import { TransactionType } from '../../../../domain/transaction';
+import { User } from '../../../../domain/user';
 
 type UserId = User['id'];
 export class TransactionDTO {

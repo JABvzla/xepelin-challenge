@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Account } from '@xepelin/domain/account';
-import { Auth } from '@xepelin/domain/auth';
-import { Id } from '@xepelin/domain/generics';
-import { User } from '@xepelin/domain/user';
+import { Account } from '../../../../domain/account';
+import { Auth } from '../../../../domain/auth';
+import { Id } from '../../../../domain/generics';
+import { User } from '../../../../domain/user';
 import { Document } from 'mongoose';
 
 @Schema({ collection: 'users ' })

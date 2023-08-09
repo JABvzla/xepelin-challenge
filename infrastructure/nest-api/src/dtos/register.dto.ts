@@ -1,5 +1,5 @@
-import { Auth } from '@xepelin/domain/auth';
-import { User } from '@xepelin/domain/user';
+import { Auth } from '../../../../domain/auth';
+import { User } from '../../../../domain/user';
 
 export class RegisterDTO {
   id?: User['id'];

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Auth } from '@xepelin/domain/auth';
-import { Id } from '@xepelin/domain/generics';
+import { Auth } from '../../../../domain/auth';
+import { Id } from '../../../../domain/generics';
 import { Document } from 'mongoose';
 
 @Schema({ collection: 'auths ' })

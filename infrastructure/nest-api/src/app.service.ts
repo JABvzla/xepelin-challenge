@@ -1,7 +1,16 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { createAccount as applicationCreateAccount } from './../../../application/create-account';
+import { Account } from './../../../domain/account';
+import { Auth } from './../../../domain/auth';
+import { Repository } from './../../../domain/generics';
+import { Transaction } from './../../../domain/transaction';
+import { User } from './../../../domain/user';
 import { Model } from 'mongoose';
+import { mongooseRepository } from './adapter/mongooseRepository';
+import { AccountDTO } from './dtos/account.dto';
 import { RegisterDTO } from './dtos/register.dto';
+import { TransactionDTO } from './dtos/transaction.dto';
 import { AccountClass, AccountDocument } from './schemas/account.schema';
 import { AuthClass, AuthDocument } from './schemas/auth.schema';
 import {
@@ -9,11 +18,14 @@ import {
   TransactionDocument,
 } from './schemas/transaction.schema';
 import { UserClass, UserDocument } from './schemas/user.schema';
-import { AccountDTO } from './dtos/account.dto';
-import { TransactionDTO } from './dtos/transaction.dto';
 
 @Injectable()
 export class AppService {
+  userRepository: Repository<User>;
+  authRepository: Repository<Auth>;
+  transactionRepository: Repository<Transaction>;
+  accountRepository: Repository<Account>;
+
   constructor(
     @InjectModel(AuthClass.name)
     private readonly authModel: Model<AuthDocument>,
@@ -23,7 +35,14 @@ export class AppService {
     private readonly userModel: Model<UserDocument>,
     @InjectModel(TransactionClass.name)
     private readonly transactionModel: Model<TransactionDocument>,
-  ) {}
+  ) {
+    this.userRepository = mongooseRepository<User>(this.userModel);
+    this.authRepository = mongooseRepository<Auth>(this.authModel);
+    this.transactionRepository = mongooseRepository<Transaction>(
+      this.transactionModel,
+    );
+    this.accountRepository = mongooseRepository<Account>(this.accountModel);
+  }
   async whipeTestData() {
     await this.accountModel.deleteMany({
       name: { $regex: 'e2e', $options: 'i' },
@@ -37,26 +56,11 @@ export class AppService {
     return;
   }
   async createAccount(request: AccountDTO) {
-    const { userId, name, number, balance } = request;
-    const userExist = await this.userModel.exists({ _id: userId });
-    if (!userExist?._id) {
-      throw new HttpException("user doesn't exist", HttpStatus.BAD_REQUEST);
-    }
-    const newAccount = await this.accountModel.create({
-      name,
-      number,
-      balance,
-    });
-    await this.userModel.findByIdAndUpdate(userExist._id, {
-      $push: { accounts: newAccount._id },
-    });
-    return {
-      id: newAccount._id,
-      name: newAccount.name,
-      userId,
-      balance: newAccount.balance,
-      number: newAccount.number,
-    };
+    return applicationCreateAccount(
+      request,
+      this.userRepository,
+      this.accountRepository,
+    );
   }
   async createUser(request: RegisterDTO) {
     const { name, username, password } = request;
