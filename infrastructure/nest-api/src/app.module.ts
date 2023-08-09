@@ -6,7 +6,10 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthClass, AuthSchema } from './schemas/auth.schema';
 import { UserClass, UserSchema } from './schemas/user.schema';
 import { AccountClass, AccountSchema } from './schemas/account.schema';
-import { TransactionClass, TransactionSchema } from './schemas/transaction.schema';
+import {
+  TransactionClass,
+  TransactionSchema,
+} from './schemas/transaction.schema';
 
 const mongoosePw = 'BSFR8mPSRm6VevRA';
 const MongooseConnection = `mongodb+srv://rootuser:${mongoosePw}@cluster0.tdtjdsx.mongodb.net/`;

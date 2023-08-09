@@ -9,6 +9,7 @@ import {
   TransactionDocument,
 } from './schemas/transaction.schema';
 import { UserClass, UserDocument } from './schemas/user.schema';
+import { AccountDTO } from './dtos/account.dto';
 
 @Injectable()
 export class AppService {
@@ -22,7 +23,41 @@ export class AppService {
     @InjectModel(TransactionClass.name)
     private readonly transactionModel: Model<TransactionDocument>,
   ) {}
-  async createAccount() {}
+  async whipeTestData() {
+    await this.accountModel.deleteMany({
+      name: { $regex: 'e2e', $options: 'i' },
+    });
+    await this.authModel.deleteMany({
+      username: { $regex: 'e2e', $options: 'i' },
+    });
+    await this.userModel.deleteMany({
+      name: { $regex: 'e2e', $options: 'i' },
+    });
+    return;
+  }
+  async createAccount(request: AccountDTO) {
+    const { userId, name, number, balance } = request;
+    const userExist = await this.userModel.exists({ _id: userId });
+    if (!userExist?._id) {
+      throw new HttpException("user doesn't exist", HttpStatus.BAD_REQUEST);
+    }
+    const newAccount = await this.accountModel.create({
+      name,
+      number,
+      balance,
+    });
+    await this.userModel.findByIdAndUpdate(userExist._id, {
+      $push: { accounts: newAccount._id },
+    });
+    return {
+      id: newAccount._id,
+      name: newAccount.name,
+      userId,
+      balance: newAccount.balance,
+      number: newAccount.number,
+    };
+  }
+
   async createTransaction() {}
   async createUser(request: RegisterDTO) {
     const { name, username, password } = request;
