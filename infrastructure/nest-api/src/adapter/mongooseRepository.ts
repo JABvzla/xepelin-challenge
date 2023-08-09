@@ -13,6 +13,7 @@ export function mongooseRepository<T>(model: Model<Document>): Repository<T> {
       return setId(createdDocument) as T;
     },
     async update(id: string, data: Partial<T>): Promise<T | null> {
+      data['id'] = undefined;
       const updatedDocument = await model.findByIdAndUpdate(id, data, {
         new: true,
       });
