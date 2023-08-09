@@ -16,7 +16,8 @@ describe('[infrastructure/nestjs-api]', () => {
 
     app = moduleRef.createNestApplication();
     await app.init();
-  });
+    return request(app.getHttpServer()).post('/whipe-test-data');
+  }, 10000);
 
   describe('[account]', () => {
     test('/POST create account', async () => {
@@ -113,10 +114,6 @@ describe('[infrastructure/nestjs-api]', () => {
   });
 
   afterAll(async () => {
-    request(app.getHttpServer())
-      .post('/whipe-test-data')
-      .then(async () => {
-        await app.close();
-      });
+    await app.close();
   });
 });
