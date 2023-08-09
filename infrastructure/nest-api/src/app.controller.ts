@@ -2,6 +2,7 @@ import { Controller, Post, Get, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { RegisterDTO } from './dtos/register.dto';
 import { AccountDTO } from './dtos/account.dto';
+import { TransactionDTO } from './dtos/transaction.dto';
 
 @Controller()
 export class AppController {
@@ -18,9 +19,9 @@ export class AppController {
   accounts(@Body() body: AccountDTO) {
     return this.appService.createAccount(body);
   }
-  @Post()
-  transactions() {
-    return this.appService.createTransaction();
+  @Post('/transaction')
+  transactions(@Body() body: TransactionDTO) {
+    return this.appService.createTransaction(body);
   }
   @Post('whipe-test-data')
   whipeTestData() {

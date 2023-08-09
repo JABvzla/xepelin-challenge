@@ -10,6 +10,7 @@ import {
 } from './schemas/transaction.schema';
 import { UserClass, UserDocument } from './schemas/user.schema';
 import { AccountDTO } from './dtos/account.dto';
+import { TransactionDTO } from './dtos/transaction.dto';
 
 @Injectable()
 export class AppService {
@@ -57,8 +58,6 @@ export class AppService {
       number: newAccount.number,
     };
   }
-
-  async createTransaction() {}
   async createUser(request: RegisterDTO) {
     const { name, username, password } = request;
     const usernameExist = await this.authModel.exists({ username });
@@ -74,6 +73,34 @@ export class AppService {
       password: '',
     };
   }
+  async createTransaction(request: TransactionDTO) {
+    const { amount, type, userId } = request;
+    const user = await this.userModel.findOne({ _id: userId });
+    if (!user?._id) {
+      throw new HttpException("user doesn't exist", HttpStatus.BAD_REQUEST);
+    }
+    if (!user.accounts?.length) {
+      throw new HttpException('user without account', HttpStatus.BAD_REQUEST);
+    }
+    const accountId = user.accounts[0];
+    const newTransaction = await this.transactionModel.create({
+      account: accountId,
+      amount,
+      type,
+    });
+    await this.accountModel.findByIdAndUpdate(accountId, {
+      $push: { transaction: newTransaction._id },
+    });
+
+    return {
+      id: newTransaction._id,
+      userId,
+      amount: newTransaction.amount,
+      type: newTransaction.type,
+      createdAt: newTransaction.createdAt,
+    };
+  }
+
   getUser() {
     // return this.authModel.find();
   }

@@ -5,6 +5,7 @@ import * as request from 'supertest';
 import { AppModule } from './app.module';
 import { RegisterDTO } from './dtos/register.dto';
 import { AccountDTO } from './dtos/account.dto';
+import { TransactionDTO } from './dtos/transaction.dto';
 
 describe('[infrastructure/nestjs-api]', () => {
   let app: INestApplication;
@@ -109,6 +110,57 @@ describe('[infrastructure/nestjs-api]', () => {
       return result.expect(function (res) {
         expect(res.status).toEqual(400);
         expect(res.body).toEqual(expectResult);
+      });
+    });
+  });
+  describe.only('[transaction]', () => {
+    test(`/POST create DEPOSIT transaction`, async () => {
+      // Arrange
+      const userWithAccount: RegisterDTO = {
+        name: 'e2e-create-transaction-deposit',
+        username: 'e2e-create-transaction-deposit',
+        password: 'funny-password',
+      };
+      const accountToRegister: AccountDTO = {
+        name: 'e2e-create-account',
+        number: '55123',
+        userId: '',
+        balance: 2545.05,
+      };
+      const transactionToRegister: TransactionDTO = {
+        type: 'DEPOSIT',
+        userId: '',
+        amount: 2450,
+      };
+      const expectResult = {
+        type: 'DEPOSIT',
+        amount: 2450,
+      };
+
+      // Action
+      const result = request(app.getHttpServer())
+        .post('/register')
+        .send(userWithAccount)
+        .then((userRes) => {
+          expect(userRes.body.id).not.toBeNull();
+          accountToRegister.userId = userRes.body.id;
+          return request(app.getHttpServer())
+            .post('/account')
+            .send(accountToRegister)
+            .then((res) => {
+              expect(res.body.userId).not.toBeNull();
+              transactionToRegister.userId = res.body.userId;
+              return request(app.getHttpServer())
+                .post('/transaction')
+                .send(transactionToRegister);
+            });
+        });
+      // Assert
+      return result.then(function (res) {
+        expect(res.status).toEqual(201);
+        expect(res.body).toEqual(expect.objectContaining(expectResult));
+        expect(res.body.id).not.toBeNull();
+        expect(res.body.userId).not.toBeNull();
       });
     });
   });
