@@ -19,11 +19,11 @@ const AccountInfo = () => {
         <span className="fw-b fs-l ff-serif">{accountNumber}</span>
       </label>
       <div className={styles.action}>
-        <Link href="/deposit" className="none">
-          <input type="button" value={t("account_info_deposit")} />
+        <Link href="/transaction?op=deposit" className="none">
+          <input type="button" value={t("transaction_deposit")} />
         </Link>
-        <Link href="/withdraw" className="none">
-          <input type="button" value={t("account_info_withdraw")} />
+        <Link href="/transaction?op=withdrawal" className="none">
+          <input type="button" value={t("transaction_withdrawal")} />
         </Link>
       </div>
     </div>

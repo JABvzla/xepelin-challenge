@@ -1,14 +1,15 @@
+import Link from "next/link"
 import { useT } from "../../provider/language"
 import styles from "./transaction-list.module.css"
 
 const transactions = [
   { id: "12378789123123789", amount: 2500, type: "DEPOSIT", date: "10-08-2023" },
   { id: "12378789123123789", amount: 1500, type: "DEPOSIT", date: "09-08-2023" },
-  { id: "51231231231251567", amount: 400, type: "WITHDRAW", date: "06-08-2023" },
-  { id: "51231231231251567", amount: 1000400, type: "WITHDRAW", date: "06-08-2023" },
-  { id: "12378789128912355", amount: 300, type: "DEPOSIT", date: "05-08-2023"  },
-  { id: "12378789123123789", amount: 425, type: "WITHDRAW", date: "05-08-2023" },
-  { id: "15123123125111231", amount: 425, type: "WITHDRAW", date: "01-08-2023" },
+  { id: "51231231231251567", amount: 400, type: "WITHDRAWAL", date: "06-08-2023" },
+  { id: "51231231231251567", amount: 1000400, type: "WITHDRAWAL", date: "06-08-2023" },
+  { id: "12378789128912355", amount: 300, type: "DEPOSIT", date: "05-08-2023" },
+  { id: "12378789123123789", amount: 425, type: "WITHDRAWAL", date: "05-08-2023" },
+  { id: "15123123125111231", amount: 425, type: "WITHDRAWAL", date: "01-08-2023" },
 ]
 
 const TransactionList = () => {
@@ -25,16 +26,22 @@ const TransactionList = () => {
         >
           <div>
             <label className="fs-m">
-              Nº<span className="fw-b ff-serif">  {transaction.id}</span>
+              Nº<span className="fw-b ff-serif"> {transaction.id}</span>
             </label>
             <label className="fs-lg">
               {t("transaction_date")}:<span className="fw-b ff-serif"> {transaction.date}</span>
             </label>
           </div>
+          <Link href={`/transaction?op=${transaction.type}&amount=${transaction.amount}`} className={styles.repeat}>
+            {t("transaction_repeat")}
+          </Link>
           <label className="fs-lg">
             {t("transaction_amount")}
             <br />
-            <span className="fw-b fs-xxl ff-serif">{transaction.type === 'WITHDRAW' && '-'}{transaction.amount}$</span>
+            <span className="fw-b fs-xxl ff-serif">
+              {transaction.type === "WITHDRAWAL" && "-"}
+              {transaction.amount}$
+            </span>
           </label>
         </div>
       ))}

@@ -6,7 +6,7 @@ import Layout from "../layout"
 import TransactionList from "../components/transaction-list"
 
 
-export default function Home() {
+export default function Page() {
   const withAccount = true
   const withTransactions = true
   return (

@@ -15,9 +15,11 @@ const en = {
   account_balance: "Account balance",
   register_account_disclaimer: "Your user does not have a registered account",
   register_account: "Register account",
-  account_info_deposit: "Deposit",
-  account_info_withdraw: "Withdraw",
+  transaction_deposit: "Deposit",
+  transaction_withdrawal: "Withdrawal",
+  transaction_type: "Transaciton type",
   transaction_amount: 'Amount',
   transaction_date: 'Date',
+  transaction_repeat: "Repeat"
 }
 export default en

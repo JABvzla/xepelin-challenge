@@ -1,4 +1,5 @@
 .transactionList {
+  position: relative;
   display: flex;
   flex-direction: row;
   margin-top: var(--gap);
@@ -10,14 +11,25 @@
   color: var(--color-3);
   padding: var(--gap);
   background: var(--bg-1);
-  background-color: rgba(168, 41, 41, 0.844);
 }
 .transactionList > div {
   display: flex;
   flex-direction: column;
+  padding-top: 30px;
 }
 
 .transactionList > label {
   margin-left: auto;
   text-align: right;
+}
+
+.repeat {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 10px;
+  text-decoration: none;
+  border-bottom-right-radius: var(--radius);
+  color: white;
+  background-color: var(--color-3);
 }

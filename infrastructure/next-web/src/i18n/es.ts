@@ -15,10 +15,12 @@ const es = {
   account_balance: "Saldo en la cuenta",
   register_account_disclaimer: "Tu usuario no posee una cuenta registrada",
   register_account: "Registrar cuenta",
-  account_info_deposit: "Ingresar",
-  account_info_withdraw: "Retirar",
+  transaction_deposit: "Ingresar",
+  transaction_withdrawal: "Retirar",
+  transaction_type: "Tipo de opreación",
   transaction_amount: 'Monto',
   transaction_date: 'Fecha',
+  transaction_repeat: 'Repetir'
 }
 
 export default es

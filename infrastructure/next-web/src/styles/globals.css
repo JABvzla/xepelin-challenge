@@ -71,7 +71,7 @@ a.none{
   width: 100%;
   font-size: medium;
 }
-input {
+input, select {
   padding: 10px;
   box-sizing: border-box;
   border-radius: var(--radius);
@@ -80,15 +80,13 @@ input {
 
 }
 
-input[type="text"], input[type="number"], input[type="password"]  {
+select, input[type="text"], input[type="number"], input[type="password"]  {
   background: rgba(255, 255, 255, 0.14);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6.7px);
   -webkit-backdrop-filter: blur(6.7px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-
 
 input[type="button"] {
   font-weight: bold;
