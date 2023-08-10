@@ -8,8 +8,7 @@ body {
   --gap: 25px;
   --box-width: 535px;
   --max-width: 1120px;
-  --gradient-1: linear-gradient(90deg, var(--color-3) 0%, var(--color-2) 25%,  var(--color-1) 50%, var(--color-2) 75%, var(--color-3) 100%);
-  --gradient-2: linear-gradient(90deg, var(--color-3) 0%, var(--color-2) 25%,  var(--color-3) 75%, var(--color-1) 100%);
+  --bg-1: #fff5;
   --shadow-1: 5px 5px 15px rgba(0, 0, 0, 0.2);
   --radius : 12px;
   font-family: 'Raleway', sans-serif;
