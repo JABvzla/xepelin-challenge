@@ -11,7 +11,7 @@ const es = {
   greeting: "Hola",
   balance: "Saldo",
   account_name: "Nombre de la cuenta",
-  account_number: "Number de cuenta",
+  account_number: "Numero de cuenta",
   account_balance: "Saldo en la cuenta",
   register_account_disclaimer: "Tu usuario no posee una cuenta registrada",
   register_account: "Registrar cuenta",

@@ -21,8 +21,8 @@ function TransactionChart() {
       {
         label: "Cierre Mensual",
         data: labels.map(() => Math.ceil(Math.random() * 100)),
-        borderColor: "#ccc047",
-        backgroundColor: "#ccc047",
+        borderColor: "#111D4A",
+        backgroundColor: "#111D4A",
       },
     ],
   }

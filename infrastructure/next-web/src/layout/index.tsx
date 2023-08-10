@@ -16,8 +16,8 @@ export default function Layout(props: Props) {
       <main className={styles.content}>
         <div>
           <Link href={'/'} className="none">
-          <p className="fw-b fs-xxl">XEPELIN</p>
-          <span>{t('title')}</span>
+          <p className="fw-b fs-xxl fc-white">XEPELIN</p>
+          <span className="fc-white">{t('title')}</span>
           </Link>
           <button onClick={toggleLanguage} className={styles.language}>{language}</button>
         </div>

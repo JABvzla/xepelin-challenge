@@ -12,6 +12,12 @@
   padding: var(--gap);
   background: var(--bg-1);
 }
+
+@media screen and (max-width: 500px) {
+  .transactionList {
+    min-height: 150px;
+  }
+}
 .transactionList > div {
   display: flex;
   flex-direction: column;
