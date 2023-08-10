@@ -33,6 +33,8 @@
 @media (max-width: 1120px) {
   .content {
     width: 100%;
+    height: 100vh;
+    margin: 0px;
   }
 }
 
@@ -41,10 +43,14 @@
   position: absolute;
   top: var(--gap);
   right: var(--gap);
-  background: white;
+  text-align: center;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
   border: none;
-  padding: 0px 1em;
   font-size: 14px;
+  background: var(--color-1);
+  color: white;
 }
 
 

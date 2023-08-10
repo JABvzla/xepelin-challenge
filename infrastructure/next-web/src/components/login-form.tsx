@@ -1,4 +1,5 @@
 import { useT } from "@/provider/language"
+import Link from "next/link"
 
 const LoginForm = () => {
   const t = useT()
@@ -13,6 +14,7 @@ const LoginForm = () => {
         <input type="password" placeholder={t('password')} name="password" />
       </label>
       <input type="button" value={t("login")} />
+      <Link href='/register'>{t('not-registered')}</Link>
     </div>
   )
 }

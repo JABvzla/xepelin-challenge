@@ -1,6 +1,7 @@
 import Image from "next/image"
 import styles from "./layout.module.css"
 import { useLanguage, useT } from "@/provider/language"
+import Link from "next/link";
 
 interface Props extends React.PropsWithChildren {}
 export default function Layout(props: Props) {
@@ -14,8 +15,10 @@ export default function Layout(props: Props) {
       </div>
       <main className={styles.content}>
         <div>
+          <Link href={'/'} className="none">
           <p className="fb fs-xxl">XEPELIN</p>
           <span>{t('title')}</span>
+          </Link>
           <button onClick={toggleLanguage} className={styles.language}>{language}</button>
         </div>
         <div>
