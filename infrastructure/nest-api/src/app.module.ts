@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -10,12 +10,20 @@ import {
   TransactionClass,
   TransactionSchema,
 } from './schemas/transaction.schema';
+import { JwtModule } from '@nestjs/jwt';
+import { BigDepositLogger } from './midleware/big-deposit-logger.middleware';
 
 const mongoosePw = 'BSFR8mPSRm6VevRA';
 const MongooseConnection = `mongodb+srv://rootuser:${mongoosePw}@cluster0.tdtjdsx.mongodb.net/`;
+const jwtSecret = 'SFR8mPSRm6VevRA';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    JwtModule.register({
+      global: true,
+      secret: jwtSecret,
+      signOptions: { expiresIn: '60s' },
+    }),
     MongooseModule.forRoot(MongooseConnection),
     MongooseModule.forFeature([
       { name: AuthClass.name, schema: AuthSchema },
@@ -27,8 +35,13 @@ const MongooseConnection = `mongodb+srv://rootuser:${mongoosePw}@cluster0.tdtjds
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
-
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(BigDepositLogger)
+      .forRoutes({ path: '/transaction', method: RequestMethod.POST });
+  }
+}
 // rootuser
 // BSFR8mPSRm6VevRA
 

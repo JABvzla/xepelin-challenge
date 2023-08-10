@@ -1,5 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { createAccount as applicationCreateAccount } from './../../../application/create-account';
 import { createTransaction as applicationCreateTransaction } from './../../../application/create-transaction';
 import { Account } from './../../../domain/account';
@@ -7,7 +9,6 @@ import { Auth } from './../../../domain/auth';
 import { Repository } from './../../../domain/generics';
 import { Transaction } from './../../../domain/transaction';
 import { User } from './../../../domain/user';
-import { Model } from 'mongoose';
 import { mongooseRepository } from './adapter/mongooseRepository';
 import { AccountDTO } from './dtos/account.dto';
 import { RegisterDTO } from './dtos/register.dto';
@@ -36,6 +37,7 @@ export class AppService {
     private readonly userModel: Model<UserDocument>,
     @InjectModel(TransactionClass.name)
     private readonly transactionModel: Model<TransactionDocument>,
+    private jwtService: JwtService,
   ) {
     this.userRepository = mongooseRepository<User>(this.userModel);
     this.authRepository = mongooseRepository<Auth>(this.authModel);
@@ -69,6 +71,20 @@ export class AppService {
       name: newUser.name,
       username: newAuth.username,
       password: '',
+    };
+  }
+  async login(username, password) {
+    const auth = await this.authModel.findOne({ username, password });
+    if (!auth) {
+      throw new HttpException('login fail', HttpStatus.UNAUTHORIZED);
+    }
+    const user = await this.userModel.findOne({ auth: auth._id });
+    if (!user) {
+      throw new HttpException('login fail', HttpStatus.UNAUTHORIZED);
+    }
+    const payload = { userId: user._id };
+    return {
+      access_token: await this.jwtService.signAsync(payload),
     };
   }
   async createAccount(request: AccountDTO) {

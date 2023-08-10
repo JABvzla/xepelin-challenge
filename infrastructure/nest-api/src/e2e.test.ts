@@ -130,12 +130,15 @@ describe('[Infrastructure] e2e-nestjs-api', () => {
       const transactionToRegister: TransactionDTO = {
         type: 'DEPOSIT',
         userId: '',
-        amount: 2450,
+        amount: 25000,
       };
       const expectResult = {
         type: 'DEPOSIT',
-        amount: 2450,
+        amount: 25000,
       };
+      const expectedLog = (userId) =>
+        `[transaction] user: ${userId} amount: 25000`;
+      console.log = jest.fn();
 
       // Action
       const result = request(app.getHttpServer())
@@ -161,10 +164,9 @@ describe('[Infrastructure] e2e-nestjs-api', () => {
         expect(res.body).toEqual(expect.objectContaining(expectResult));
         expect(res.body.id).not.toBeNull();
         expect(res.body.userId).not.toBeNull();
+        expect(console.log).toHaveBeenCalledWith(expectedLog(res.body.userId));
       });
     });
-  });
-  describe('[transaction]', () => {
     test(`/POST create WITHDRAWAL transaction`, async () => {
       // Arrange
       const userWithAccount: RegisterDTO = {
@@ -213,6 +215,51 @@ describe('[Infrastructure] e2e-nestjs-api', () => {
         expect(res.body.id).not.toBeNull();
         expect(res.body.userId).not.toBeNull();
       });
+    });
+  });
+
+  describe('[login]', () => {
+    test('/POST login should sign in a user and return an access token', async () => {
+      // Arrange
+      const loginRequest = {
+        username: 'e2e-login-username',
+        password: 'password-to-login',
+      };
+      const userToRegister: RegisterDTO = {
+        name: 'e2e-login-user',
+        ...loginRequest,
+      };
+      // Action
+      const result = request(app.getHttpServer())
+        .post('/register')
+        .send(userToRegister)
+        .then((res) => {
+          expect(res.body.id).not.toBeNull();
+          return request(app.getHttpServer()).post('/login').send(loginRequest);
+        });
+      // Assert
+      return result.then(function (res) {
+        expect(res.status).toEqual(200);
+        expect(res.body.access_token).not.toBeNull();
+      });
+    });
+
+    test('should return Unauthorized when invalid credentials are provided', async () => {
+      // Arrange
+      const invalidUserCredentials = {
+        username: 'invalidUsername',
+        password: 'invalidPassword',
+      };
+      const expectResult = { message: 'login fail', statusCode: 401 };
+
+      // Action & Assert
+      await request(app.getHttpServer())
+        .post('/login')
+        .send(invalidUserCredentials)
+        .then((res) => {
+          expect(res.status).toBe(401);
+          expect(res.body).toEqual(expectResult);
+        });
     });
   });
 

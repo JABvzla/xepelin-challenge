@@ -1,13 +1,14 @@
-import { Controller, Post, Get, Body } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { RegisterDTO } from './dtos/register.dto';
 import { AccountDTO } from './dtos/account.dto';
+import { RegisterDTO } from './dtos/register.dto';
 import { TransactionDTO } from './dtos/transaction.dto';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
   @Get()
+  @HttpCode(200)
   getUser() {
     return this.appService.getUser();
   }
@@ -23,7 +24,13 @@ export class AppController {
   transactions(@Body() body: TransactionDTO) {
     return this.appService.createTransaction(body);
   }
-  @Post('whipe-test-data')
+
+  @Post('/login')
+  @HttpCode(200)
+  login(@Body() body) {
+    return this.appService.login(body.username, body.password);
+  }
+  @Post('/whipe-test-data')
   whipeTestData() {
     return this.appService.whipeTestData();
   }
