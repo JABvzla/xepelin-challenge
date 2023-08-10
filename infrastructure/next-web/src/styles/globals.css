@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap');
+
+body {
+  --color-1: #504377;
+  --color-2: #ccc047;
+  --color-3: #111D4A;
+  --space: 100px;
+  --gap: 25px;
+  --box-width: 535px;
+  --max-width: 1120px;
+  --gradient-1: linear-gradient(90deg, var(--color-3) 0%, var(--color-2) 25%,  var(--color-1) 50%, var(--color-2) 75%, var(--color-3) 100%);
+  --gradient-2: linear-gradient(90deg, var(--color-3) 0%, var(--color-2) 25%,  var(--color-3) 75%, var(--color-1) 100%);
+  --shadow-1: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  --radius : 12px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  color: white;
+  letter-spacing: 0px;
+  user-select: var(--color-2);
+}
+
+*::selection {
+  background-color: var(--color-);
+  color: white;
+}
+.flex-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: var(--gap);
+  column-gap: var(--gap);
+}
+
+.flex-row {
+  display: flex;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  row-gap: var(--gap);
+  column-gap: var(--gap);
+}
+.space-bottom {
+  margin-bottom: var(--space);
+}
+.gap-bottom {
+  margin-bottom: var(--gap);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  padding: 10px;
+  row-gap: var(--gap);
+  margin-top: var(--space);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form > label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: medium;
+}
+input {
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: var(--radius);
+  outline: none;
+  border: none;
+
+}
+
+input[type="text"], input[type="password"]  {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.7px);
+  -webkit-backdrop-filter: blur(6.7px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+
+input[type="button"] {
+  font-weight: bold;
+  background-color: var(--color-2);
+  color: var(--color-1);
+}
+
+
+/* FONTS */
+.fs-xxl { font-size: 42px; }
+.fs-xl { font-size: 32px; }
+.fs-lg { font-size: 20px; }
+.fs-m { font-size: 12px; }
+.fb { font-weight: bold; }
