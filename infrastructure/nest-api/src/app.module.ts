@@ -1,4 +1,5 @@
-import 'dotenv/config';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config({ path: './../../.env' });
 import {
   MiddlewareConsumer,
   Module,
@@ -20,7 +21,7 @@ import {
 } from './schemas/transaction.schema';
 import { UserClass, UserSchema } from './schemas/user.schema';
 
-const MongoURL = `mongodb+srv://${process.env.MONGOOSE_USER}:${process.env.MONGOOSE_PASSWORD}@${process.env.MONGOOSE_CONNECTION}`;
+const MONGO_URL = `mongodb+srv://${process.env.MONGOOSE_USER}:${process.env.MONGOOSE_PASSWORD}@${process.env.MONGOOSE_CONNECTION}`;
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ const MongoURL = `mongodb+srv://${process.env.MONGOOSE_USER}:${process.env.MONGO
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '60s' },
     }),
-    MongooseModule.forRoot(MongoURL),
+    MongooseModule.forRoot(MONGO_URL),
     MongooseModule.forFeature([
       { name: AuthClass.name, schema: AuthSchema },
       { name: UserClass.name, schema: UserSchema },

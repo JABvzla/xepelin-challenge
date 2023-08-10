@@ -4,6 +4,7 @@
   "description": "fullstack challenge by JABvzla",
   "main": "index.js",
   "scripts": {
+    "start:nest-api": "npm run start:dev --prefix ./infrastructure/nest-api",
     "test": "jest"
   },
   "author": "JABvzla",
