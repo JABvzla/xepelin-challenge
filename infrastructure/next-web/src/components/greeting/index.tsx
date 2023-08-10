@@ -14,7 +14,7 @@ const Greeting = () => {
       {Boolean(balance) && <label className="fw-b fs-m">
         {t("balance")}
         <br />
-        <span className="fw-b fs-xl">{balance}$</span>
+        <span className="fw-b fs-xl ff-serif">{balance}$</span>
       </label>}
     </div>
   )

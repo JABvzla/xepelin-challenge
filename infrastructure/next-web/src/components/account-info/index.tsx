@@ -16,7 +16,7 @@ const AccountInfo = () => {
       <label>
         Nº
         <br />
-        <span className="fw-b fs-l">{accountNumber}</span>
+        <span className="fw-b fs-l ff-serif">{accountNumber}</span>
       </label>
       <div className={styles.action}>
         <Link href="/deposit" className="none">

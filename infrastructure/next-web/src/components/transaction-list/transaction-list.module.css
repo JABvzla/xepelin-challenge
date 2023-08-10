@@ -1,0 +1,23 @@
+.transactionList {
+  display: flex;
+  flex-direction: row;
+  margin-top: var(--gap);
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-3);
+  padding: var(--gap);
+  background: var(--bg-1);
+  background-color: rgba(168, 41, 41, 0.844);
+}
+.transactionList > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.transactionList > label {
+  margin-left: auto;
+  text-align: right;
+}

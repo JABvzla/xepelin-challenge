@@ -17,5 +17,7 @@ const en = {
   register_account: "Register account",
   account_info_deposit: "Deposit",
   account_info_withdraw: "Withdraw",
+  transaction_amount: 'Amount',
+  transaction_date: 'Date',
 }
 export default en

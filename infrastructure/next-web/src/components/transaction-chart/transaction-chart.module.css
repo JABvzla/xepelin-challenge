@@ -1,0 +1,4 @@
+.transactionChart {
+  padding: var(--gap);
+  background: var(--bg-1);
+}
