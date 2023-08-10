@@ -3,18 +3,18 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from './app.module';
-import { RegisterDTO } from './dtos/register.dto';
 import { AccountDTO } from './dtos/account.dto';
+import { RegisterDTO } from './dtos/register.dto';
 import { TransactionDTO } from './dtos/transaction.dto';
+import './midleware/jwt-auth.middleware';
 
+jest.mock('./midleware/jwt-auth.middleware', () => ({}));
 describe('[Infrastructure] e2e-nestjs-api', () => {
   let app: INestApplication;
-
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
-
     app = moduleRef.createNestApplication();
     await app.init();
     return request(app.getHttpServer()).post('/whipe-test-data');

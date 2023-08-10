@@ -1,30 +1,36 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import 'dotenv/config';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule } from '@nestjs/config';
-import { AuthClass, AuthSchema } from './schemas/auth.schema';
-import { UserClass, UserSchema } from './schemas/user.schema';
+import { BigDepositLogger } from './midleware/big-deposit-logger.middleware';
+import { JwtAuthGuardMiddleware } from './midleware/jwt-auth.middleware';
 import { AccountClass, AccountSchema } from './schemas/account.schema';
+import { AuthClass, AuthSchema } from './schemas/auth.schema';
 import {
   TransactionClass,
   TransactionSchema,
 } from './schemas/transaction.schema';
-import { JwtModule } from '@nestjs/jwt';
-import { BigDepositLogger } from './midleware/big-deposit-logger.middleware';
+import { UserClass, UserSchema } from './schemas/user.schema';
 
-const mongoosePw = 'BSFR8mPSRm6VevRA';
-const MongooseConnection = `mongodb+srv://rootuser:${mongoosePw}@cluster0.tdtjdsx.mongodb.net/`;
-const jwtSecret = 'SFR8mPSRm6VevRA';
+const MongoURL = `mongodb+srv://${process.env.MONGOOSE_USER}:${process.env.MONGOOSE_PASSWORD}@${process.env.MONGOOSE_CONNECTION}`;
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
     JwtModule.register({
       global: true,
-      secret: jwtSecret,
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '60s' },
     }),
-    MongooseModule.forRoot(MongooseConnection),
+    MongooseModule.forRoot(MongoURL),
     MongooseModule.forFeature([
       { name: AuthClass.name, schema: AuthSchema },
       { name: UserClass.name, schema: UserSchema },
@@ -38,11 +44,13 @@ const jwtSecret = 'SFR8mPSRm6VevRA';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
+      .apply(JwtAuthGuardMiddleware)
+      .exclude(
+        { path: '/login', method: RequestMethod.POST },
+        { path: '/register', method: RequestMethod.POST },
+      )
+      .forRoutes({ path: '*', method: RequestMethod.ALL })
       .apply(BigDepositLogger)
       .forRoutes({ path: '/transaction', method: RequestMethod.POST });
   }
 }
-// rootuser
-// BSFR8mPSRm6VevRA
-
-// `mongodb+srv://rootuser:BSFR8mPSRm6VevRA@cluster0.tdtjdsx.mongodb.net/`

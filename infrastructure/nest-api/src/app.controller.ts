@@ -6,11 +6,13 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AccountDTO } from './dtos/account.dto';
 import { RegisterDTO } from './dtos/register.dto';
 import { TransactionDTO } from './dtos/transaction.dto';
+import { JwtAuthGuardMiddleware } from './midleware/jwt-auth.middleware';
 
 @Controller()
 export class AppController {
@@ -31,6 +33,7 @@ export class AppController {
       throw new HttpException(response, HttpStatus.BAD_REQUEST);
     return response;
   }
+
   @Post('/transaction')
   transactions(@Body() body: TransactionDTO) {
     const response = this.appService.createTransaction(body);
