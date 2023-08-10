@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { AccountDTO } from './dtos/account.dto';
 import { RegisterDTO } from './dtos/register.dto';
@@ -18,11 +26,17 @@ export class AppController {
   }
   @Post('/account')
   accounts(@Body() body: AccountDTO) {
-    return this.appService.createAccount(body);
+    const response = this.appService.createAccount(body);
+    if (typeof response === 'string')
+      throw new HttpException(response, HttpStatus.BAD_REQUEST);
+    return response;
   }
   @Post('/transaction')
   transactions(@Body() body: TransactionDTO) {
-    return this.appService.createTransaction(body);
+    const response = this.appService.createTransaction(body);
+    if (typeof response === 'string')
+      throw new HttpException(response, HttpStatus.BAD_REQUEST);
+    return response;
   }
 
   @Post('/login')

@@ -21,7 +21,7 @@ export async function createTransaction(
     return "user doesn't have account"
   }
   const accountId = user.accounts[0]
-  const account = await accountRepository.find(accountId)
+  const account = await accountRepository.find(accountId).catch(() => {})
   if (!account) {
     return "account not found"
   }
