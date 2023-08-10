@@ -24,6 +24,13 @@ body {
   color: white;
 }
 
+.warning {
+  background-color: var(--color-3);
+  padding: 1em;
+  text-align: center;
+  border-radius: var(--radius);
+}
+
 .mt-gap {
   margin-top: var(--gap);
 }
@@ -74,7 +81,7 @@ input {
 
 }
 
-input[type="text"], input[type="password"]  {
+input[type="text"], input[type="number"], input[type="password"]  {
   background: rgba(255, 255, 255, 0.14);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6.7px);

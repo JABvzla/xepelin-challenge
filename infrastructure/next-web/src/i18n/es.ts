@@ -3,13 +3,18 @@ const es = {
   name: "Nombre",
   username: "Usuario",
   password: "Contraseña",
-  "password-repeat": "Repetir contraseña",
+  password_repeat: "Repetir contraseña",
   login: "Entrar",
   register: "Registrar",
-  "not-registered": "¿No tienes cuenta aún?",
-  "yes-registered": "Ya tengo una cuenta",
-  "greeting": "Hola",
-  "balance": "Saldo"
+  not_registered: "¿No tienes cuenta aún?",
+  yes_registered: "Ya tengo una cuenta",
+  greeting: "Hola",
+  balance: "Saldo",
+  account_name: "Nombre de la cuenta",
+  account_number: "Number de cuenta",
+  account_balance: "Saldo en la cuenta",
+  register_account_disclaimer: "Tu usuario no posee una cuenta registrada",
+  register_account: "Registrar cuenta",
 }
 
 export default es

@@ -18,11 +18,11 @@ const RegisterForm = () => {
         <input type="password" placeholder={t('password')} name="password" />
       </label>
       <label>
-        {t('password-repeat')}
-        <input type="password" placeholder={t('password-repeat')} name="password-repeat" />
+        {t('password_repeat')}
+        <input type="password" placeholder={t('password_repeat')} name="password_repeat" />
       </label>
       <input type="button" value={t("register")} />
-      <Link href='/login'>{t('yes-registered')}</Link>
+      <Link href='/login'>{t('yes_registered')}</Link>
     </div>
   )
 }
