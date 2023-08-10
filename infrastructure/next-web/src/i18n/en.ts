@@ -8,6 +8,7 @@ const en = {
   register: 'Register',
   "not-registered": "You have not yet registered?",
   "yes-registered": "I have an account",
-
+  "greeting": "Hi",
+  "balance": "Balance"
 }
 export default en;

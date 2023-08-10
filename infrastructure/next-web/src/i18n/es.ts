@@ -8,6 +8,8 @@ const es = {
   register: "Registrar",
   "not-registered": "¿No tienes cuenta aún?",
   "yes-registered": "Ya tengo una cuenta",
+  "greeting": "Hola",
+  "balance": "Saldo"
 }
 
 export default es

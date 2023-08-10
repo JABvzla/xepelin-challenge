@@ -23,6 +23,10 @@ body {
   background-color: var(--color-1);
   color: white;
 }
+
+.mt-gap {
+  margin-top: var(--gap);
+}
 .flex-wrap {
   display: flex;
   flex-direction: row;
@@ -89,8 +93,10 @@ input[type="button"] {
 
 
 /* FONTS */
+.no-wrap { white-space: nowrap;}
 .fs-xxl { font-size: 42px; }
 .fs-xl { font-size: 32px; }
 .fs-lg { font-size: 20px; }
 .fs-m { font-size: 14px; }
-.fb { font-weight: bold; }
+.fw-b { font-weight: bold; }
+.fw-n { font-weight: normal; }

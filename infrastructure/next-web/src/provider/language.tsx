@@ -29,5 +29,5 @@ export const useLanguage = () => useContext(LanguageContext)
 export const useT = () => {
   const { language } = useLanguage();
   const lang = {es, en}[language];
-  return (name: any) => lang[name]
+  return (name: any) => lang[name] || name
 }

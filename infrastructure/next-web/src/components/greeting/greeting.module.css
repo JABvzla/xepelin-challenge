@@ -1,0 +1,10 @@
+.greeting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: var(--gap);
+  row-gap: var(--gap);
+  flex-wrap: wrap;
+  min-height: 60px;
+}
