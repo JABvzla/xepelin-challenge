@@ -25,15 +25,16 @@ export async function createTransaction(
   if (!account) {
     return "account_not_found"
   }
+  const amount = Math.abs(transactionRequest?.amount);
   const operator = transactionRequest.type === "DEPOSIT" ? 1 : -1
-  const balance = transactionRequest.amount * operator + account.balance
+  const balance = amount * operator + account.balance
   if (balance < 0) {
     return "insufficient_funds"
   }
 
   const newTransaction = await transactionRepository.create({
     account: accountId,
-    amount: transactionRequest.amount,
+    amount: amount,
     type: transactionRequest.type,
   })
   const newAccountData: Account = {
