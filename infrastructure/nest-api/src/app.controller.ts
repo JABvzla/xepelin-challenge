@@ -5,8 +5,10 @@ import {
   HttpCode,
   HttpException,
   HttpStatus,
-  Post
+  Post,
+  Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { AppService } from './app.service';
 import { AccountDTO } from './dtos/account.dto';
 import { RegisterDTO } from './dtos/register.dto';
@@ -15,10 +17,10 @@ import { TransactionDTO } from './dtos/transaction.dto';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-  @Get()
+  @Get('user-detail')
   @HttpCode(200)
-  getUser() {
-    return this.appService.getUser();
+  getUser(@Req() request: Request) {
+    return this.appService.getUser(request);
   }
   @Post('/register')
   register(@Body() body: RegisterDTO) {

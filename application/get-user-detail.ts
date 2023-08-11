@@ -1,14 +1,23 @@
-import { AccountRepository } from "../domain/account"
+import { Account, AccountRepository } from "../domain/account"
 import { Id } from "../domain/generics"
-import { TransactionRepository } from "../domain/transaction"
-import { UserRepository } from "../domain/user"
+import { Transaction, TransactionRepository } from "../domain/transaction"
+import { User, UserRepository } from "../domain/user"
 
+export interface UserDetail {
+  name: User["name"]
+  account: {
+    name: Account["name"]
+    number: Account["number"]
+    balance: Account["balance"]
+    transactions: Transaction[]
+  }
+}
 export async function getUserDetail(
   userRequest: Id,
   userRepository: UserRepository,
   accountRepository: AccountRepository,
   transactionRepository: TransactionRepository
-) {
+): Promise<UserDetail | string> {
   const user = await userRepository.find(userRequest)
   if (!user) {
     return "USER NOT FOUND"
@@ -25,7 +34,7 @@ export async function getUserDetail(
     }))
   )
   return {
-    ...user,
-    accounts: accountsWithTransactions,
+    name: user.name,
+    account: accountsWithTransactions[0],
   }
 }

@@ -29,7 +29,7 @@ const MONGO_URL = `mongodb+srv://${process.env.MONGOOSE_USER}:${process.env.MONG
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '2h' },
     }),
     MongooseModule.forRoot(MONGO_URL),
     MongooseModule.forFeature([

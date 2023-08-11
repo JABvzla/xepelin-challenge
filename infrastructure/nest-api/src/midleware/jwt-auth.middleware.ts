@@ -11,7 +11,6 @@ export class JwtAuthGuardMiddleware implements NestMiddleware {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ message: 'Token Missing' });
     }
-
     const token = authHeader.slice(7);
     try {
       const decoded = this.jwtService.verify(token);

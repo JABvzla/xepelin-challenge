@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { createAccount as applicationCreateAccount } from './../../../application/create-account';
 import { createTransaction as applicationCreateTransaction } from './../../../application/create-transaction';
+import { getUserDetail as applicationGetUserDetail } from './../../../application/get-user-detail';
 import { Account } from './../../../domain/account';
 import { Auth } from './../../../domain/auth';
 import { Repository } from './../../../domain/generics';
@@ -20,6 +21,7 @@ import {
   TransactionDocument,
 } from './schemas/transaction.schema';
 import { UserClass, UserDocument } from './schemas/user.schema';
+import { Request } from 'express';
 
 @Injectable()
 export class AppService {
@@ -104,7 +106,12 @@ export class AppService {
     );
   }
 
-  getUser() {
-    // return this.authModel.find();
+  getUser(request: Request) {
+    return applicationGetUserDetail(
+      request.body.userId,
+      this.userRepository,
+      this.accountRepository,
+      this.transactionRepository,
+    );
   }
 }
