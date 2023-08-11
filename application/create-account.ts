@@ -14,10 +14,10 @@ export async function createAccount(
 ) {
   const user = await userRepository.find(accountRequest.userId).catch(() => {})
   if (!user) {
-    return "user doesn't exist"
+    return "user_not_found"
   }
   if (user?.accounts?.length) {
-    return "user already has an account created"
+    return "user_already_has_an_account_created"
   }
 
   const newAccount = await accountRepository.create({

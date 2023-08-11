@@ -19,12 +19,17 @@ const en = {
   transaction_deposit: "Deposit",
   transaction_withdrawal: "Withdrawal",
   transaction_type: "Transaciton type",
-  transaction_amount: 'Amount',
-  transaction_date: 'Date',
+  transaction_amount: "Amount",
+  transaction_date: "Date",
   transaction_repeat: "Repeat",
-  field_required: 'All fields are required',
-  password_missmatch: 'Password are mismatching',
-  login_fail: 'Invalid username or password',
-  chart_title: 'Deposit and Withdrawal'
+  field_required: "All fields are required",
+  password_missmatch: "Password are mismatching",
+  login_fail: "Invalid username or password",
+  chart_title: "Deposit and Withdrawal",
+  user_not_found: "User not found",
+  user_without_account: "No account found",
+  account_not_found: "Account not found",
+  insufficient_funds: "Insufficient funds",
+  user_already_has_an_account_created: "Account already exists",
 }
 export default en

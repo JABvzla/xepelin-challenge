@@ -32,6 +32,7 @@ const AccountForm = () => {
     }
     hide() 
   }
+  if(!userDetail) return <></>
   if(userDetail?.account) return <></>
   return (
     <div className="form">

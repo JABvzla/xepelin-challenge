@@ -59,7 +59,7 @@ describe("[Application] createTransaction", () => {
     // Action
     const result = await createTransaction(transactionRequest, userRepository, transactionRepository, accountRepository)
     // Assert
-    expect(result).toBe("user doesn't exist")
+    expect(result).toBe("user_not_found")
   })
 
   test("create withdrawal transaction for an existing user and account", async () => {
@@ -136,6 +136,6 @@ describe("[Application] createTransaction", () => {
     const result = await createTransaction(transactionRequest, userRepository, transactionRepository, accountRepository);
     
     // Assert
-    expect(result).toBe("insufficient funds");
+    expect(result).toBe("insufficient_funds");
   });
 })

@@ -19,24 +19,24 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
   @Get('user-detail')
   @HttpCode(200)
-  getUser(@Req() request: Request) {
+  async getUser(@Req() request: Request) {
     return this.appService.getUser(request);
   }
   @Post('/register')
-  register(@Body() body: RegisterDTO) {
+  async register(@Body() body: RegisterDTO) {
     return this.appService.createUser(body);
   }
   @Post('/account')
-  accounts(@Body() body: AccountDTO) {
-    const response = this.appService.createAccount(body);
+  async accounts(@Body() body: AccountDTO) {
+    const response = await this.appService.createAccount(body);
     if (typeof response === 'string')
       throw new HttpException(response, HttpStatus.BAD_REQUEST);
     return response;
   }
 
   @Post('/transaction')
-  transactions(@Body() body: TransactionDTO) {
-    const response = this.appService.createTransaction(body);
+  async transactions(@Body() body: TransactionDTO) {
+    const response = await this.appService.createTransaction(body);
     if (typeof response === 'string')
       throw new HttpException(response, HttpStatus.BAD_REQUEST);
     return response;
@@ -44,11 +44,11 @@ export class AppController {
 
   @Post('/login')
   @HttpCode(200)
-  login(@Body() body) {
+  async login(@Body() body) {
     return this.appService.login(body.username, body.password);
   }
   @Post('/whipe-test-data')
-  whipeTestData() {
+  async whipeTestData() {
     return this.appService.whipeTestData();
   }
 }

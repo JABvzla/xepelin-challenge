@@ -15,20 +15,20 @@ export async function createTransaction(
 ) {
   const user = await userRepository.find(transactionRequest.userId).catch(() => {})
   if (!user) {
-    return "user doesn't exist"
+    return "user_not_found"
   }
   if (!user?.accounts?.length) {
-    return "user doesn't have account"
+    return "user_without_account"
   }
   const accountId = user.accounts[0]
   const account = await accountRepository.find(accountId).catch(() => {})
   if (!account) {
-    return "account not found"
+    return "account_not_found"
   }
   const operator = transactionRequest.type === "DEPOSIT" ? 1 : -1
   const balance = transactionRequest.amount * operator + account.balance
   if (balance < 0) {
-    return "insufficient funds"
+    return "insufficient_funds"
   }
 
   const newTransaction = await transactionRepository.create({

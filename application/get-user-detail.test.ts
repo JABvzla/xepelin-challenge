@@ -93,7 +93,7 @@ describe("[Application] getUserDetail", () => {
     const userRepository = userR([existingUser])
     const accountRepository = accountR([])
     const transactionRepository = transactionR([])
-    const nonExistentUserId = "999" // Assuming this user doesn't exist
+    const nonExistentUserId = "999" // Assuming this user_not_found
     const expectedResult = "Id 999 Not Found"
     try {
       // Action

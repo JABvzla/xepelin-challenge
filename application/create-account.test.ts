@@ -66,7 +66,7 @@ describe("[Application] createAccount", () => {
     const result = await createAccount(accountRequest, userRepository, accountRepository)
 
     // Assert
-    expect(result).toBe("user already has an account created")
+    expect(result).toBe("user_already_has_an_account_created")
   })
   test("create account for non-existent user", async () => {
     // Arrange
@@ -83,7 +83,7 @@ describe("[Application] createAccount", () => {
       balance: createdAccount.balance,
       number: createdAccount.number,
     }
-    const expectedResult = "user doesn't exist"
+    const expectedResult = "user_not_found"
     // Action
     const result = await createAccount(accountRequest, userRepository, accountRepository)
     // Assert

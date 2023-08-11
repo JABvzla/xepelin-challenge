@@ -19,13 +19,18 @@ const es = {
   transaction_deposit: "Ingresar",
   transaction_withdrawal: "Retirar",
   transaction_type: "Tipo de opreación",
-  transaction_amount: 'Monto',
-  transaction_date: 'Fecha',
-  transaction_repeat: 'Repetir',
-  field_required: 'Todos los campos son requeridos',
-  password_missmatch: 'Las contraseñas deben coincidir',
-  login_fail: 'Usuario o contraseña invalidos',
-  chart_title: "ingresos y retiros"
+  transaction_amount: "Monto",
+  transaction_date: "Fecha",
+  transaction_repeat: "Repetir",
+  field_required: "Todos los campos son requeridos",
+  password_missmatch: "Las contraseñas deben coincidir",
+  login_fail: "Usuario o contraseña invalidos",
+  chart_title: "ingresos y retiros",
+  user_not_found: "Usuario no encontrado",
+  user_without_account: "Usuario sin cuenta",
+  account_not_found: "Cuenta no encontrada",
+  insufficient_funds: "Fondos insuficientes",
+  user_already_has_an_account_created: "Usuario ya tiene una cuenta creada",
 }
 
 export default es
