@@ -7,16 +7,21 @@ import Greeting from "../components/greeting"
 import TransactionList from "../components/transaction-list"
 import { UserDetail } from "../../../../application/get-user-detail"
 import Layout from "../layout"
+import { useLoader } from "@/provider/loader-context"
 
 export default function Page() {
   const [userDetail, setUserDetail] = useState<UserDetail>()
+  const { show, hide, isLoading } = useLoader()
   useEffect(() => {
+    show()
     const getUserDetail = async () => {
       const response = await axios.get("/user-detail")
-      if(!response?.data) return;
+      if (!response?.data) return
       setUserDetail(response.data)
+      hide()
     }
     getUserDetail()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const withAccount = userDetail?.account
   const withTransactions = userDetail?.account?.transactions?.length

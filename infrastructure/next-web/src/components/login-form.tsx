@@ -24,7 +24,7 @@ const LoginForm = () => {
     }
 
     const response = await axios.post("/login", body)
-    if(response.data && response?.data?.access_token) {
+    if(response?.data && response?.data?.access_token) {
       login(response.data.access_token);
     }    
   }

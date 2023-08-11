@@ -1,7 +1,8 @@
+import axios from "axios"
+import { useRouter } from "next/router"
+import { Account } from "../../../../domain/account"
 import getFormValue from "../helper/get-form-value"
 import { useT } from "../provider/language-context"
-import { Account } from "../../../../domain/account"
-import axios from "axios"
 
 
 interface AccountForm {
@@ -12,7 +13,7 @@ interface AccountForm {
 
 const AccountForm = () => {
   const t = useT()
-
+  const router = useRouter()
   const handleRegisterAccount = async () => {
     const fields = ["name", "number", "balance"]
     const body = getFormValue<AccountForm>(fields);
@@ -23,8 +24,7 @@ const AccountForm = () => {
     }
     const response = await axios.post("/account", body)
     if(response.data && response?.data) {
-      // TODO SOMETHING
-      console.log('%c⧭', 'color: #917399', response?.data);
+      router.push('/')
     }    
   }
   return (

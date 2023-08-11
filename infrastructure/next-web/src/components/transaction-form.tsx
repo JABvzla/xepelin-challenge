@@ -26,8 +26,7 @@ const TransactionForm = () => {
     const body = { amount: transactionAmount, type: transactionType }
     const response = await axios.post("/transaction", body)
     if (response.data && response?.data) {
-      // TODO SOMETHING
-      console.log("%c⧭", "color: #917399", response?.data)
+      router.push('/')
     }
   }
 
