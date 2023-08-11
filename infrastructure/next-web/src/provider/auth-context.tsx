@@ -21,7 +21,6 @@ export default function AuthProvider({ children }: Props) {
   const [accessToken, setAccessToken] = useState<string | null>(null)
   const login = (token: string) => {
     setAccessToken(token)
-    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`
     sessionStorage.setItem("access_token", token)
   }
   const logout = () => {
@@ -33,9 +32,10 @@ export default function AuthProvider({ children }: Props) {
   useEffect(() => {
     const storedToken = sessionStorage.getItem("access_token")
     if (storedToken) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`
       setAccessToken(storedToken)
     }
-  }, [])
+  }, [isLoggedIn])
 
   const router = useRouter()
   useEffect(() => {  

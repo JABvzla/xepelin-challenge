@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { TransactionType } from "../../../../domain/transaction"
 import { useT } from "../provider/language-context"
+import axios from "axios"
 
 const TransactionForm = () => {
   const t = useT()
@@ -20,6 +21,16 @@ const TransactionForm = () => {
     if (isNaN(newAmount)) return
     setTransactionAmount(newAmount)
   }
+
+  const handleTransaction = async () => {
+    const body = { amount: transactionAmount, type: transactionType }
+    const response = await axios.post("/transaction", body)
+    if (response.data && response?.data) {
+      // TODO SOMETHING
+      console.log("%c⧭", "color: #917399", response?.data)
+    }
+  }
+
   return (
     <div className="form">
       <label>
@@ -43,7 +54,11 @@ const TransactionForm = () => {
           value={transactionAmount}
         />
       </label>
-      <input type="button" value={t(`transaction_${transactionType.toLocaleLowerCase()}` as any)} />
+      <input
+        type="button"
+        value={t(`transaction_${transactionType.toLocaleLowerCase()}` as any)}
+        onClick={handleTransaction}
+      />
     </div>
   )
 }

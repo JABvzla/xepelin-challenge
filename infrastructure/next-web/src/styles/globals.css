@@ -24,6 +24,7 @@ body {
 }
 
 .warning {
+  color: var(--color-2);
   background-color: var(--color-3);
   padding: 1em;
   text-align: center;

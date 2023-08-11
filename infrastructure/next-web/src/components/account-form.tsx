@@ -1,7 +1,32 @@
-import { useT } from "@/provider/language-context"
+import getFormValue from "../helper/get-form-value"
+import { useT } from "../provider/language-context"
+import { Account } from "../../../../domain/account"
+import axios from "axios"
+
+
+interface AccountForm {
+  name: Account["name"]
+  number: Account["number"]
+  balance: Account["balance"]
+}
 
 const AccountForm = () => {
   const t = useT()
+
+  const handleRegisterAccount = async () => {
+    const fields = ["name", "number", "balance"]
+    const body = getFormValue<AccountForm>(fields);
+    if (Object.keys(body).length !== fields.length) {
+      console.log("%c⧭", "color: #aa00ff", "Todos los campos son requeridos")
+      // TODO message
+      return
+    }
+    const response = await axios.post("/account", body)
+    if(response.data && response?.data) {
+      // TODO SOMETHING
+      console.log('%c⧭', 'color: #917399', response?.data);
+    }    
+  }
   return (
     <div className="form">
       <p className="fs-m warning">
@@ -9,17 +34,17 @@ const AccountForm = () => {
       </p>
       <label>
         {t('account_name')}
-        <input type="text" placeholder={t('account_name')} name="name" />
+        <input type="text" placeholder={t('account_name')} id="name" />
       </label>
       <label>
         {t('account_number')}
-        <input type="number" placeholder={t('account_number')} name="number" />
+        <input type="number" placeholder={t('account_number')} id="number" />
       </label>
       <label>
         {t('account_balance')}
-        <input type="number" placeholder={t('account_balance')} name="number" />
+        <input type="number" placeholder={t('account_balance')} id="balance" />
       </label>
-      <input type="button" value={t("register_account")} />
+      <input type="button" value={t("register_account")} onClick={handleRegisterAccount} />
     </div>
   )
 }
