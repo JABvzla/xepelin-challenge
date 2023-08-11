@@ -7,9 +7,13 @@ const AMOUNT_TO_WARNING = 10000;
 export class BigDepositLogger implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction): void {
     res.on('finish', () => {
-      if (req?.body?.amount > AMOUNT_TO_WARNING && res.statusCode === 201) {
+      if (
+        req?.body?.amount > AMOUNT_TO_WARNING &&
+        req?.body?.type === 'DEPOSIT' &&
+        res.statusCode === 201
+      ) {
         console.log(
-          `[transaction] user: ${req?.body?.userId} amount: ${req?.body?.amount}`,
+          `[transaction][DEPOSIT] user: ${req?.body?.userId} amount: ${req?.body?.amount}`,
         );
       }
     });

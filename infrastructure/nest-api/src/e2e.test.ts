@@ -139,7 +139,7 @@ describe.only('[Infrastructure] e2e-nestjs-api', () => {
         amount: 25000,
       };
       const expectedLog = (userId) =>
-        `[transaction] user: ${userId} amount: 25000`;
+        `[transaction][DEPOSIT] user: ${userId} amount: 25000`;
       console.log = jest.fn();
 
       // Action
