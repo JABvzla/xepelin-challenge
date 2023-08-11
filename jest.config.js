@@ -6,5 +6,6 @@ module.exports = {
     '<rootDir>/application/jest.config.js',
     '<rootDir>/infrastructure/memory-repository/jest.config.js',
     '<rootDir>/infrastructure/nest-api/jest.config.js',
+    '<rootDir>/infrastructure/next-web/jest.config.js',
   ],
 };

@@ -23,6 +23,8 @@ const en = {
   transaction_date: 'Date',
   transaction_repeat: "Repeat",
   field_required: 'All fields are required',
-  password_missmatch: 'Password are mismatching'
+  password_missmatch: 'Password are mismatching',
+  login_fail: 'Invalid username or password',
+  chart_title: 'Deposit and Withdrawal'
 }
 export default en

@@ -1,11 +1,14 @@
 import Link from "next/link"
 import { useT } from "../../provider/language-context"
 import styles from "./account-info.module.css"
+import { useUserDetail } from "../../provider/user-detail-context"
 
 const AccountInfo = () => {
   const t = useT()
-  const accountName = "José Antonio Bonito de Jesús"
-  const accountNumber = "12345678910112"
+  const { userDetail } = useUserDetail()
+  if(!userDetail?.account) return <></>
+  const accountName = userDetail.account.name
+  const accountNumber = userDetail.account.number
   return (
     <div className={styles.accountInfo}>
       <label>

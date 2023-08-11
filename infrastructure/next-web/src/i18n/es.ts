@@ -23,7 +23,9 @@ const es = {
   transaction_date: 'Fecha',
   transaction_repeat: 'Repetir',
   field_required: 'Todos los campos son requeridos',
-  password_missmatch: 'Las contraseñas deben coincidir'
+  password_missmatch: 'Las contraseñas deben coincidir',
+  login_fail: 'Usuario o contraseña invalidos',
+  chart_title: "ingresos y retiros"
 }
 
 export default es

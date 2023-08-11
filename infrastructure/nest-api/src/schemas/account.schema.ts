@@ -4,7 +4,7 @@ import { Id, USD } from '../../../../domain/generics';
 import { Transaction } from '../../../../domain/transaction';
 import { Document } from 'mongoose';
 
-@Schema({ collection: 'accounts ' })
+@Schema({ collection: 'accounts', timestamps: true })
 export class AccountClass implements Account {
   id: Id;
   @Prop()

@@ -3,7 +3,7 @@ import { Auth } from '../../../../domain/auth';
 import { Id } from '../../../../domain/generics';
 import { Document } from 'mongoose';
 
-@Schema({ collection: 'auths ' })
+@Schema({ collection: 'auths', timestamps: true })
 export class AuthClass implements Auth {
   id: Id;
   @Prop()

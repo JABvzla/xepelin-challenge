@@ -30,5 +30,5 @@ export const useT = () => {
   const { language } = useLanguage()
   const lang = { es, en }[language]
   type LangAtribute = keyof typeof es
-  return (name: LangAtribute) => lang[name] || name
+  return (name: LangAtribute) => lang[name] || ''
 }

@@ -17,7 +17,7 @@ describe("[Application] getUserDetail", () => {
     const userToSearch = { id: "1", name: "Jose Bonito", auth: [], accounts: [] }
     const userRepository = userR([userToSearch])
     const userRequest = userToSearch.id
-    const expectResult = userToSearch
+    const expectResult = { name: "Jose Bonito", account: undefined }
     // Action
     const result = await getUserDetail(userRequest, userRepository, accountRepository, transactionRepository)
     // Assert
@@ -36,7 +36,7 @@ describe("[Application] getUserDetail", () => {
     const accountRepository = accountR(accounts)
     const transactionRepository = transactionR([])
     const userRequest = userWithAccounts.id
-    const expectedResult = { ...userWithAccounts, accounts }
+    const expectedResult = { name: "Jane Doe", account: accounts[0] }
 
     // Action
     const result = await getUserDetail(userRequest, userRepository, accountRepository, transactionRepository)
@@ -68,18 +68,16 @@ describe("[Application] getUserDetail", () => {
     ])
     const userRequest = userWithAccountsAndTransactions.id
     const expectedResult = {
-      ...userWithAccountsAndTransactions,
-      accounts: [
-        {
-          id: "account-3",
-          name: "Investment",
-          number: "345678",
-          transactions: [
-            { id: "transaction-1", type: "deposit", amount: 100 },
-            { id: "transaction-2", type: "withdrawal", amount: -50 },
-          ],
-        },
-      ],
+      name: "Alice Wonderland",
+      account: {
+        id: "account-3",
+        name: "Investment",
+        number: "345678",
+        transactions: [
+          { id: "transaction-1", type: "deposit", amount: 100 },
+          { id: "transaction-2", type: "withdrawal", amount: -50 },
+        ],
+      },
     }
 
     // Action
@@ -106,25 +104,24 @@ describe("[Application] getUserDetail", () => {
     }
   })
 
-
-  test('get user with non-existent account and transactions', async () => {
+  test("get user with non-existent account and transactions", async () => {
     // Arrange
     const existingUser = {
-      id: '1',
-      name: 'Jose Bonito',
+      id: "1",
+      name: "Jose Bonito",
       auth: [],
-      accounts: ['existing-account'],
-    };
-    const userRepository = userR([existingUser]);
+      accounts: ["existing-account"],
+    }
+    const userRepository = userR([existingUser])
     const existingAccount = {
-      id: 'existing-account',
-      name: 'Savings',
-      number: '123456',
-      transactions: ['non-existing-transaction'],
-    };
-    const accountRepository = accountR([existingAccount]);
-    const transactionRepository = transactionR([]);
-    const expectedResult =  "Id non-existing-transaction Not Found"
+      id: "existing-account",
+      name: "Savings",
+      number: "123456",
+      transactions: ["non-existing-transaction"],
+    }
+    const accountRepository = accountR([existingAccount])
+    const transactionRepository = transactionR([])
+    const expectedResult = "Id non-existing-transaction Not Found"
 
     try {
       // Action
@@ -133,5 +130,5 @@ describe("[Application] getUserDetail", () => {
       // Assert
       expect(e).toMatch(expectedResult)
     }
-  });
+  })
 })

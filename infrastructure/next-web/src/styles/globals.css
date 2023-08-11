@@ -98,7 +98,9 @@ select, input[type="text"], input[type="number"], input[type="password"]  {
   -webkit-backdrop-filter: blur(6.7px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
+input[type="number"] {
+  font-family: sans-serif;
+}
 input[type="button"] {
   font-weight: bold;
   background-color: var(--color-2);

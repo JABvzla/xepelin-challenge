@@ -3,6 +3,9 @@ import { useRouter } from "next/router"
 import { Account } from "../../../../domain/account"
 import getFormValue from "../helper/get-form-value"
 import { useT } from "../provider/language-context"
+import { showWarning } from "../helper/toast"
+import { useLoader } from "../provider/loader-context"
+import { useUserDetail } from "@/provider/user-detail-context"
 
 
 interface AccountForm {
@@ -13,20 +16,23 @@ interface AccountForm {
 
 const AccountForm = () => {
   const t = useT()
-  const router = useRouter()
+  const { hide } = useLoader()
+  const { userDetail, fetchUserDetail } = useUserDetail()
   const handleRegisterAccount = async () => {
     const fields = ["name", "number", "balance"]
     const body = getFormValue<AccountForm>(fields);
     if (Object.keys(body).length !== fields.length) {
-      console.log("%c⧭", "color: #aa00ff", "Todos los campos son requeridos")
-      // TODO message
+      showWarning(t("field_required"))
       return
     }
     const response = await axios.post("/account", body)
     if(response.data && response?.data) {
-      router.push('/')
-    }    
+      fetchUserDetail()
+      return;
+    }
+    hide() 
   }
+  if(userDetail?.account) return <></>
   return (
     <div className="form">
       <p className="fs-m warning">

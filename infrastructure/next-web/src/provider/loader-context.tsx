@@ -2,6 +2,7 @@ import { showError } from "@/helper/toast"
 import axios from "axios"
 import { createContext, useContext, useEffect, useState } from "react"
 import debounce from "../helper/debounce"
+import { useLanguage, useT } from "./language-context"
 
 interface LoaderValue {
   isLoading: Boolean
@@ -15,6 +16,7 @@ export default function LoaderProvider(props: Props) {
   const [loader, setLoader] = useState<boolean>(false)
   const [minLoader, setMinLoader] = useState<boolean>(true)
   const hideMin = debounce(() => setMinLoader(false), 600)
+  const t = useT();
 
   useEffect(() => {
     if (minLoader) {
@@ -41,7 +43,11 @@ export default function LoaderProvider(props: Props) {
     (r) => r,
     (error) => {
       if (error?.response?.status === 400 && error?.response?.data?.message) {
-        showError(error?.response?.data?.message)
+        const message = t(error?.response?.data?.message) || error?.response?.data?.message;
+        showError(message)
+      }
+      if(error?.code === "ERR_NETWORK") {
+        showError('Network Error')
       }
       return error;
     }

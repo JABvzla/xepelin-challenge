@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config({ path: '.env' });
 import { afterAll, beforeAll, describe, expect, test } from '@jest/globals';
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
@@ -9,7 +11,7 @@ import { TransactionDTO } from './dtos/transaction.dto';
 import './midleware/jwt-auth.middleware';
 
 jest.mock('./midleware/jwt-auth.middleware', () => ({}));
-describe('[Infrastructure] e2e-nestjs-api', () => {
+describe.only('[Infrastructure] e2e-nestjs-api', () => {
   let app: INestApplication;
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -250,14 +252,14 @@ describe('[Infrastructure] e2e-nestjs-api', () => {
         username: 'invalidUsername',
         password: 'invalidPassword',
       };
-      const expectResult = { message: 'login fail', statusCode: 401 };
+      const expectResult = { message: 'login_fail', statusCode: 400 };
 
       // Action & Assert
       await request(app.getHttpServer())
         .post('/login')
         .send(invalidUserCredentials)
         .then((res) => {
-          expect(res.status).toBe(401);
+          expect(res.status).toBe(400);
           expect(res.body).toEqual(expectResult);
         });
     });

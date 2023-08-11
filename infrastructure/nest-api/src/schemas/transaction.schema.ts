@@ -6,7 +6,7 @@ import { Account } from '../../../../domain/account';
 
 type AccountId = Account['id'];
 
-@Schema({ collection: 'transactions ' })
+@Schema({ collection: 'transactions', timestamps: true })
 export class TransactionClass implements Transaction {
   id: Id;
   @Prop()

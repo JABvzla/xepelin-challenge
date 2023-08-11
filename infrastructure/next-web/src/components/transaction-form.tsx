@@ -3,10 +3,13 @@ import { useState } from "react"
 import { TransactionType } from "../../../../domain/transaction"
 import { useT } from "../provider/language-context"
 import axios from "axios"
+import { useLoader } from "../provider/loader-context"
+import { showWarning } from "@/helper/toast"
 
 const TransactionForm = () => {
   const t = useT()
   const router = useRouter()
+  const { hide } = useLoader()
   const { op, amount } = router.query
   const type = typeof op === "string" ? op.toUpperCase() : "DEPOSIT"
   const initialAmount = typeof amount === "string" && !isNaN(+amount) ? +amount : 0
@@ -24,10 +27,16 @@ const TransactionForm = () => {
 
   const handleTransaction = async () => {
     const body = { amount: transactionAmount, type: transactionType }
+    if(!body.amount || !body.type) {
+      showWarning(t("field_required"))
+      return;
+    }
     const response = await axios.post("/transaction", body)
     if (response.data && response?.data) {
       router.push('/')
+      return;
     }
+    hide()
   }
 
   return (

@@ -6,6 +6,7 @@ import axios from "axios"
 import Link from "next/link"
 import { Auth } from "../../../../domain/auth"
 import { User } from "../../../../domain/user"
+import { useLoader } from "@/provider/loader-context"
 
 interface RegisterForm {
   name: User["name"]
@@ -16,6 +17,7 @@ interface RegisterForm {
 const RegisterForm = () => {
   const t = useT()
   const { login } = useAuth()
+  const { hide } = useLoader()
   const handleRegister = async () => {
     const fields = ["name", "username", "password", "password_repeat"]
     const body = getFormValue<RegisterForm>(fields)
@@ -32,7 +34,9 @@ const RegisterForm = () => {
     const response = await axios.post("/register", body)
     if (response.data && response?.data?.access_token) {
       login(response.data.access_token)
+      return
     }
+    hide()
   }
 
   return (
