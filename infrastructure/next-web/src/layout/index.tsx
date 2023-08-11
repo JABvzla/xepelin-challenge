@@ -1,9 +1,9 @@
 import Image from "next/image"
 import styles from "./layout.module.css"
-import { useLanguage, useT } from "@/provider/language-context"
+import { useLanguage, useT } from "../provider/language-context"
 import Link from "next/link"
-import { useAuth } from "@/provider/auth-context"
-import { useLoader } from "@/provider/loader-context"
+import { useAuth } from "../provider/auth-context"
+import { useLoader } from "../provider/loader-context"
 
 interface Props extends React.PropsWithChildren {}
 export default function Layout(props: Props) {

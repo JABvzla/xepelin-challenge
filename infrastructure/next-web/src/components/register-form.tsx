@@ -1,12 +1,12 @@
-import getFormValue from "@/helper/get-form-value"
-import { showWarning } from "@/helper/toast"
-import { useAuth } from "@/provider/auth-context"
-import { useT } from "@/provider/language-context"
+import getFormValue from "../helper/get-form-value"
+import { showWarning } from "../helper/toast"
+import { useAuth } from "../provider/auth-context"
+import { useT } from "../provider/language-context"
 import axios from "axios"
 import Link from "next/link"
 import { Auth } from "../../../../domain/auth"
 import { User } from "../../../../domain/user"
-import { useLoader } from "@/provider/loader-context"
+import { useLoader } from "../provider/loader-context"
 
 interface RegisterForm {
   name: User["name"]

@@ -5,7 +5,7 @@ import getFormValue from "../helper/get-form-value"
 import { useT } from "../provider/language-context"
 import { showWarning } from "../helper/toast"
 import { useLoader } from "../provider/loader-context"
-import { useUserDetail } from "@/provider/user-detail-context"
+import { useUserDetail } from "../provider/user-detail-context"
 
 
 interface AccountForm {

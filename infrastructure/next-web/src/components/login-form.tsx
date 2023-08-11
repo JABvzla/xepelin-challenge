@@ -1,11 +1,11 @@
-import getFormValue from "@/helper/get-form-value"
+import getFormValue from "../helper/get-form-value"
 import axios from "axios"
 import Link from "next/link"
 import { Auth } from "../../../../domain/auth"
 import { useT } from "../provider/language-context"
-import { useAuth } from "@/provider/auth-context"
-import { showWarning } from "@/helper/toast"
-import { useLoader } from "@/provider/loader-context"
+import { useAuth } from "../provider/auth-context"
+import { showWarning } from "../helper/toast"
+import { useLoader } from "../provider/loader-context"
 
 interface LoginForm {
   username: Auth["username"]

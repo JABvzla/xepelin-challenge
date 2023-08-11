@@ -12,7 +12,7 @@ import { Line } from "react-chartjs-2"
 import styles from "./transaction-chart.module.css"
 import { useUserDetail } from "../../provider/user-detail-context"
 import { formatDate } from "../../helper/date-formater"
-import { useT } from "@/provider/language-context"
+import { useT } from "../../provider/language-context"
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
@@ -28,7 +28,7 @@ function TransactionChart() {
     datasets: [
       {
         label: t('chart_title'),
-        data: transactions.map((transaction) => transaction.amount),
+        data: transactions.map((transaction) => transaction.type === 'WITHDRAWAL' ? -transaction.amount : transaction.amount),
         fill: false,
         borderColor: "#111D4A",
         backgroundColor: "#111D4A",
@@ -36,9 +36,17 @@ function TransactionChart() {
     ],
   }
 
+
   return (
     <div className={styles.transactionChart} style={{}}>
-      <Line data={data} />
+      <Line data={data} options={{
+        scales: {
+        xAxis: {
+          position: 'top',
+          reverse: true
+        }
+        }
+      }} />
     </div>
   )
 }

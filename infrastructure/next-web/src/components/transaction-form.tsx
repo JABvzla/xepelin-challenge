@@ -4,7 +4,7 @@ import { TransactionType } from "../../../../domain/transaction"
 import { useT } from "../provider/language-context"
 import axios from "axios"
 import { useLoader } from "../provider/loader-context"
-import { showWarning } from "@/helper/toast"
+import { showWarning } from "../helper/toast"
 
 const TransactionForm = () => {
   const t = useT()
