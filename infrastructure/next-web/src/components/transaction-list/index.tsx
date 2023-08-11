@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useT } from "../../provider/language"
+import { useT } from "../../provider/language-context"
 import styles from "./transaction-list.module.css"
 
 const transactions = [

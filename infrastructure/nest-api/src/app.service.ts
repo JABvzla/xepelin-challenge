@@ -67,6 +67,7 @@ export class AppService {
     const newAuth = await this.authModel.create({ username, password });
     const newUser = await this.userModel.create({ name, auth: [newAuth._id] });
     return {
+      access_token: await this.jwtService.signAsync({ userId: newUser._id }),
       id: newUser._id,
       name: newUser.name,
       username: newAuth.username,

@@ -5,6 +5,7 @@ const en = {
   password: "Password",
   password_repeat: "Repeat password",
   login: "Login",
+  logout: "Logout",
   register: "Register",
   not_registered: "You have not yet registered?",
   yes_registered: "I have an account",

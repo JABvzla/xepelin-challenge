@@ -1,12 +1,14 @@
 import Image from "next/image"
 import styles from "./layout.module.css"
-import { useLanguage, useT } from "@/provider/language"
+import { useLanguage, useT } from "@/provider/language-context"
 import Link from "next/link";
+import { useAuth } from "@/provider/auth-context";
 
 interface Props extends React.PropsWithChildren {}
 export default function Layout(props: Props) {
   const { language, setLanguage } = useLanguage();
   const t = useT();
+  const { logout, isLoggedIn } = useAuth()
   const toggleLanguage = () => setLanguage(language === 'es'? 'en' : 'es'); 
   return (
     <div>
@@ -19,6 +21,7 @@ export default function Layout(props: Props) {
           <p className="fw-b fs-xxl fc-white">XEPELIN</p>
           <span className="fc-white">{t('title')}</span>
           </Link>
+          {isLoggedIn && <button onClick={logout} className={styles.logout}>{t('logout')}</button>}
           <button onClick={toggleLanguage} className={styles.language}>{language}</button>
         </div>
         <div>

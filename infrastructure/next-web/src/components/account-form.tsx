@@ -1,4 +1,4 @@
-import { useT } from "@/provider/language"
+import { useT } from "@/provider/language-context"
 
 const AccountForm = () => {
   const t = useT()

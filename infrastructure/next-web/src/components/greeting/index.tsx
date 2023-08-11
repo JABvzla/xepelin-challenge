@@ -1,4 +1,4 @@
-import { useT } from "../../provider/language"
+import { useT } from "../../provider/language-context"
 import styles from "./greeting.module.css"
 
 const Greeting = () => {

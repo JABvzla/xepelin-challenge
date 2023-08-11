@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { TransactionType } from "../../../../domain/transaction"
-import { useT } from "../provider/language"
+import { useT } from "../provider/language-context"
 
 const TransactionForm = () => {
   const t = useT()
@@ -43,7 +43,7 @@ const TransactionForm = () => {
           value={transactionAmount}
         />
       </label>
-      <input type="button" value={t(`transaction_${transactionType.toLocaleLowerCase()}`)} />
+      <input type="button" value={t(`transaction_${transactionType.toLocaleLowerCase()}` as any)} />
     </div>
   )
 }

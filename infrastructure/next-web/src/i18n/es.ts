@@ -5,6 +5,7 @@ const es = {
   password: "Contraseña",
   password_repeat: "Repetir contraseña",
   login: "Entrar",
+  logout: "Salir",
   register: "Registrar",
   not_registered: "¿No tienes cuenta aún?",
   yes_registered: "Ya tengo una cuenta",

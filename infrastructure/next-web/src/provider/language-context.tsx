@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from "react"
 import { useRouter } from "next/router"
-import es from "../i18n/es"
+import { createContext, useContext } from "react"
 import en from "../i18n/en"
+import es from "../i18n/es"
 
 export type Language = "es" | "en"
 interface LanguageValue {
@@ -27,7 +27,8 @@ export default function LanguageProvider(props: Props) {
 
 export const useLanguage = () => useContext(LanguageContext)
 export const useT = () => {
-  const { language } = useLanguage();
-  const lang = {es, en}[language];
-  return (name: any) => lang[name] || name
+  const { language } = useLanguage()
+  const lang = { es, en }[language]
+  type LangAtribute = keyof typeof es
+  return (name: LangAtribute) => lang[name] || name
 }

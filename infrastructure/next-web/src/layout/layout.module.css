@@ -56,5 +56,18 @@
   background: var(--color-1);
   color: white;
 }
-
+.logout {
+  cursor: pointer;
+  position: absolute;
+  top: var(--gap);
+  right: calc(var(--gap) * 2 + 20px);
+  border-radius: var(--radius);
+  padding: 0 10px;
+  height: 30px;
+  text-align: center;
+  border: none;
+  font-size: 14px;
+  background: #ccc;
+  color: var(--color-1);
+}
 

@@ -5,14 +5,12 @@ import {
   HttpCode,
   HttpException,
   HttpStatus,
-  Post,
-  UseGuards,
+  Post
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AccountDTO } from './dtos/account.dto';
 import { RegisterDTO } from './dtos/register.dto';
 import { TransactionDTO } from './dtos/transaction.dto';
-import { JwtAuthGuardMiddleware } from './midleware/jwt-auth.middleware';
 
 @Controller()
 export class AppController {
