@@ -25,8 +25,8 @@ const AccountInfo = () => {
         <Link href="/transaction?op=deposit" className="none">
           <input type="button" value={t("transaction_deposit")} />
         </Link>
-        <Link href="/transaction?op=withdrawal" className="none">
-          <input type="button" value={t("transaction_withdrawal")} />
+        <Link href="/transaction?op=withdraw" className="none">
+          <input type="button" value={t("transaction_withdraw")} />
         </Link>
       </div>
     </div>

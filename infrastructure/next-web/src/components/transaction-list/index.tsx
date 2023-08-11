@@ -34,7 +34,7 @@ const TransactionList = () => {
             {t("transaction_amount")}
             <br />
             <span className="fw-b fs-xxl ff-serif">
-              {transaction.type === "WITHDRAWAL" && "-"}
+              {transaction.type === "WITHDRAW" && "-"}
               {transaction.amount}$
             </span>
           </label>

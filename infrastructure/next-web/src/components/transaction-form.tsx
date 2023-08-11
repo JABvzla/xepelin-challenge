@@ -13,7 +13,7 @@ const TransactionForm = () => {
   const { op, amount } = router.query
   const type = typeof op === "string" ? op.toUpperCase() : "DEPOSIT"
   const initialAmount = typeof amount === "string" && !isNaN(+amount) ? +amount : 0
-  const initialType: TransactionType = type === "DEPOSIT" || type === "WITHDRAWAL" ? type : "DEPOSIT"
+  const initialType: TransactionType = type === "DEPOSIT" || type === "WITHDRAW" ? type : "DEPOSIT"
   const [transactionAmount, setTransactionAmount] = useState<number>(initialAmount)
   const [transactionType, setTransactionType] = useState<TransactionType>(initialType)
   const onTypeChange = (e: any) => {
@@ -47,8 +47,8 @@ const TransactionForm = () => {
       <label>
         {t("transaction_type")}
         <select name="type" onChange={onTypeChange}>
-          <option selected={transactionType === "WITHDRAWAL"} value="WITHDRAWAL">
-            {t("transaction_withdrawal")}
+          <option selected={transactionType === "WITHDRAW"} value="WITHDRAW">
+            {t("transaction_withdraw")}
           </option>
           <option selected={transactionType === "DEPOSIT"} value="DEPOSIT">
             {t("transaction_deposit")}

@@ -54,7 +54,7 @@ describe("[Application] createTransaction", () => {
     const transactionRequest: TransactionRequest = {
       userId: "nonexistent-user",
       amount: 500,
-      type: "WITHDRAWAL",
+      type: "WITHDRAW",
     }
     // Action
     const result = await createTransaction(transactionRequest, userRepository, transactionRepository, accountRepository)
@@ -62,10 +62,10 @@ describe("[Application] createTransaction", () => {
     expect(result).toBe("user_not_found")
   })
 
-  test("create withdrawal transaction for an existing user and account", async () => {
+  test("create withdraw transaction for an existing user and account", async () => {
     // Arrange
     const initialBalance = 5000;
-    const withdrawalAmount = 1500;
+    const withdrawAmount = 1500;
     
     const user = { id: "1", name: "John Doe", auth: [], accounts: ["account-1"] };
     const account = {
@@ -80,15 +80,15 @@ describe("[Application] createTransaction", () => {
     const accountRepository = accountR([account]);
     const createdTransaction = {
       id: "transaction-1",
-      amount: withdrawalAmount,
-      type: "WITHDRAWAL",
+      amount: withdrawAmount,
+      type: "WITHDRAW",
     };
     const transactionRepository = transactionR([]);
     
     const transactionRequest: TransactionRequest = {
       userId: user.id,
       amount: createdTransaction.amount,
-      type: "WITHDRAWAL",
+      type: "WITHDRAW",
     };
     
     const expectedResult = {
@@ -104,14 +104,14 @@ describe("[Application] createTransaction", () => {
     if (typeof result === "string") return expect(result).toBe(-1);
     expect(result).toEqual(expect.objectContaining(expectedResult));
     expect(accountResult.transactions).toContain(result.id);
-    expect(accountResult.balance).toBe(initialBalance - withdrawalAmount);
+    expect(accountResult.balance).toBe(initialBalance - withdrawAmount);
   });
 
 
-  test("attempt withdrawal transaction exceeding available balance", async () => {
+  test("attempt withdraw transaction exceeding available balance", async () => {
     // Arrange
     const initialBalance = 1000;
-    const withdrawalAmount = 1500;
+    const withdrawAmount = 1500;
     
     const user = { id: "1", name: "Jane Smith", auth: [], accounts: ["account-1"] };
     const account = {
@@ -128,8 +128,8 @@ describe("[Application] createTransaction", () => {
     
     const transactionRequest: TransactionRequest = {
       userId: user.id,
-      amount: withdrawalAmount,
-      type: "WITHDRAWAL",
+      amount: withdrawAmount,
+      type: "WITHDRAW",
     };
     
     // Action

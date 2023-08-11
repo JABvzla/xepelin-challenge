@@ -169,11 +169,11 @@ describe.only('[Infrastructure] e2e-nestjs-api', () => {
         expect(console.log).toHaveBeenCalledWith(expectedLog(res.body.userId));
       });
     });
-    test(`/POST create WITHDRAWAL transaction`, async () => {
+    test(`/POST create WITHDRAW transaction`, async () => {
       // Arrange
       const userWithAccount: RegisterDTO = {
-        name: 'e2e-create-transaction-withdrawal',
-        username: 'e2e-create-transaction-withdrawal',
+        name: 'e2e-create-transaction-withdraw',
+        username: 'e2e-create-transaction-withdraw',
         password: 'funny-password',
       };
       const accountToRegister: AccountDTO = {
@@ -183,12 +183,12 @@ describe.only('[Infrastructure] e2e-nestjs-api', () => {
         balance: 2545.05,
       };
       const transactionToRegister: TransactionDTO = {
-        type: 'WITHDRAWAL',
+        type: 'WITHDRAW',
         userId: '',
         amount: 1500,
       };
       const expectResult = {
-        type: 'WITHDRAWAL',
+        type: 'WITHDRAW',
         amount: 1500,
       };
 

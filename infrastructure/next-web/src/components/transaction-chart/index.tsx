@@ -29,7 +29,7 @@ function TransactionChart() {
       {
         label: t("chart_title"),
         data: transactions.map((transaction) =>
-          transaction.type === "WITHDRAWAL" ? -transaction.amount : transaction.amount
+          transaction.type === "WITHDRAW" ? -transaction.amount : transaction.amount
         ),
         fill: false,
         borderColor: "#111D4A",

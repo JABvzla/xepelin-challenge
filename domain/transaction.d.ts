@@ -1,7 +1,7 @@
 import { Id, Date, USD, Repository } from "./generics"
 import { Account } from "./account"
 
-export type TransactionType = "DEPOSIT" | "WITHDRAWAL"
+export type TransactionType = "DEPOSIT" | "WITHDRAW"
 export interface Transaction {
   id: Id
   account: Account["id"]

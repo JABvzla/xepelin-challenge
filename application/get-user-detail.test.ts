@@ -64,7 +64,7 @@ describe("[Application] getUserDetail", () => {
     ])
     const transactionRepository = transactionR([
       { id: "transaction-1", type: "deposit", amount: 100 },
-      { id: "transaction-2", type: "withdrawal", amount: -50 },
+      { id: "transaction-2", type: "withdraw", amount: -50 },
     ])
     const userRequest = userWithAccountsAndTransactions.id
     const expectedResult = {
@@ -75,7 +75,7 @@ describe("[Application] getUserDetail", () => {
         number: "345678",
         transactions: [
           { id: "transaction-1", type: "deposit", amount: 100 },
-          { id: "transaction-2", type: "withdrawal", amount: -50 },
+          { id: "transaction-2", type: "withdraw", amount: -50 },
         ],
       },
     }
