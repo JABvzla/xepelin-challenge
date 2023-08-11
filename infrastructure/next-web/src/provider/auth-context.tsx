@@ -57,9 +57,9 @@ export default function AuthProvider({ children }: Props) {
     (error: AxiosError) => {
       if(error?.response?.status === 401) {
         logout();
-        return error;
+        return error.response;
       }
-      return error
+      return error.response;
     }
   );
 

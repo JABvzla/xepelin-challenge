@@ -1,5 +1,5 @@
 import getFormValue from "../helper/get-form-value"
-import { showWarning } from "../helper/toast"
+import { showError, showWarning } from "../helper/toast"
 import { useAuth } from "../provider/auth-context"
 import { useT } from "../provider/language-context"
 import axios from "axios"
@@ -35,6 +35,9 @@ const RegisterForm = () => {
     if (response.data && response?.data?.access_token) {
       login(response.data.access_token)
       return
+    }
+    if(response?.data?.message) {
+      showError(t(response?.data?.message))
     }
     hide()
   }

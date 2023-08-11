@@ -1,9 +1,8 @@
 import axios from "axios"
-import { useRouter } from "next/router"
 import { Account } from "../../../../domain/account"
 import getFormValue from "../helper/get-form-value"
 import { useT } from "../provider/language-context"
-import { showWarning } from "../helper/toast"
+import { showError, showWarning } from "../helper/toast"
 import { useLoader } from "../provider/loader-context"
 import { useUserDetail } from "../provider/user-detail-context"
 
@@ -29,6 +28,9 @@ const AccountForm = () => {
     if(response.data && response?.data) {
       fetchUserDetail()
       return;
+    }
+    if(response?.data?.message) {
+      showError(t(response?.data?.message))
     }
     hide() 
   }

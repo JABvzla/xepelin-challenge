@@ -4,7 +4,7 @@ import { TransactionType } from "../../../../domain/transaction"
 import { useT } from "../provider/language-context"
 import axios from "axios"
 import { useLoader } from "../provider/loader-context"
-import { showWarning } from "../helper/toast"
+import { showError, showWarning } from "../helper/toast"
 
 const TransactionForm = () => {
   const t = useT()
@@ -35,6 +35,9 @@ const TransactionForm = () => {
     if (response.data && response?.data) {
       router.push('/')
       return;
+    }
+    if(response?.data?.message) {
+      showError(t(response?.data?.message))
     }
     hide()
   }

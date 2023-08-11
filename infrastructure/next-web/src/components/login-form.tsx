@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Auth } from "../../../../domain/auth"
 import { useT } from "../provider/language-context"
 import { useAuth } from "../provider/auth-context"
-import { showWarning } from "../helper/toast"
+import { showError, showWarning } from "../helper/toast"
 import { useLoader } from "../provider/loader-context"
 
 interface LoginForm {
@@ -27,6 +27,9 @@ const LoginForm = () => {
     if (response?.data && response?.data?.access_token) {
       login(response.data.access_token)
       return
+    }
+    if(response?.data?.message) {
+      showError(t(response?.data?.message))
     }
     hide()
   }
