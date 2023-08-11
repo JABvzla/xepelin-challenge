@@ -21,7 +21,9 @@ const es = {
   transaction_type: "Tipo de opreación",
   transaction_amount: 'Monto',
   transaction_date: 'Fecha',
-  transaction_repeat: 'Repetir'
+  transaction_repeat: 'Repetir',
+  field_required: 'Todos los campos son requeridos',
+  password_missmatch: 'Las contraseñas deben coincidir'
 }
 
 export default es

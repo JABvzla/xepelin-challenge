@@ -79,11 +79,11 @@ export class AppService {
   async login(username, password) {
     const auth = await this.authModel.findOne({ username, password });
     if (!auth) {
-      throw new HttpException('login fail', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('login fail', HttpStatus.BAD_REQUEST);
     }
     const user = await this.userModel.findOne({ auth: auth._id });
     if (!user) {
-      throw new HttpException('login fail', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('login fail', HttpStatus.BAD_REQUEST);
     }
     const payload = { userId: user._id };
     return {

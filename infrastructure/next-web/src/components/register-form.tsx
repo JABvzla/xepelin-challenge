@@ -1,10 +1,11 @@
+import getFormValue from "@/helper/get-form-value"
+import { showWarning } from "@/helper/toast"
+import { useAuth } from "@/provider/auth-context"
 import { useT } from "@/provider/language-context"
 import axios from "axios"
 import Link from "next/link"
-import { User } from "../../../../domain/user"
 import { Auth } from "../../../../domain/auth"
-import getFormValue from "@/helper/get-form-value"
-import { useAuth } from "@/provider/auth-context"
+import { User } from "../../../../domain/user"
 
 interface RegisterForm {
   name: User["name"]
@@ -19,14 +20,12 @@ const RegisterForm = () => {
     const fields = ["name", "username", "password", "password_repeat"]
     const body = getFormValue<RegisterForm>(fields)
     if (Object.keys(body).length !== fields.length) {
-      console.log("%c⧭", "color: #aa00ff", "Todos los campos son requeridos")
-      // TODO message
+      showWarning(t('field_required'))
       return
     }
 
     if (body.password !== body.password_repeat) {
-      console.log("%c⧭", "color: #e50000", "Las contraseñas no coinciden")
-      // TODO message
+      showWarning(t('password_missmatch'))
       return
     }
 

@@ -4,6 +4,8 @@ import Link from "next/link"
 import { Auth } from "../../../../domain/auth"
 import { useT } from "../provider/language-context"
 import { useAuth } from "@/provider/auth-context"
+import { showWarning } from "@/helper/toast"
+import { useLoader } from "@/provider/loader-context"
 
 interface LoginForm {
   username: Auth["username"]
@@ -12,21 +14,21 @@ interface LoginForm {
 
 const LoginForm = () => {
   const t = useT()
-  const { login } = useAuth();
+  const { login } = useAuth()
+  const { hide } = useLoader()
   const handleLogin = async () => {
     const fields = ["username", "password"]
-    const body = getFormValue<LoginForm>(fields);
-
+    const body = getFormValue<LoginForm>(fields)
     if (Object.keys(body).length !== fields.length) {
-      console.log("%c⧭", "color: #aa00ff", "Todos los campos son requeridos")
-      // TODO message
+      showWarning(t("field_required"))
       return
     }
-
     const response = await axios.post("/login", body)
-    if(response?.data && response?.data?.access_token) {
-      login(response.data.access_token);
-    }    
+    if (response?.data && response?.data?.access_token) {
+      login(response.data.access_token)
+      return
+    }
+    hide()
   }
 
   return (

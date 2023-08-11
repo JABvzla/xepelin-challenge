@@ -21,6 +21,8 @@ const en = {
   transaction_type: "Transaciton type",
   transaction_amount: 'Amount',
   transaction_date: 'Date',
-  transaction_repeat: "Repeat"
+  transaction_repeat: "Repeat",
+  field_required: 'All fields are required',
+  password_missmatch: 'Password are mismatching'
 }
 export default en

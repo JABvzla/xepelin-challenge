@@ -1,3 +1,4 @@
+import { showWarning } from "@/helper/toast"
 import axios, { AxiosError } from "axios"
 import { useRouter } from "next/router"
 import React, { createContext, useContext, useEffect, useState } from "react"
@@ -56,19 +57,8 @@ export default function AuthProvider({ children }: Props) {
     (error: AxiosError) => {
       if(error?.response?.status === 401) {
         logout();
-        return;
+        return error;
       }
-      if (error.response) {
-        console.log('%c⧭', 'color: #e57373', error);
-        // console.log('%c⧭', 'color: #ace2e6', error.response.data);
-        return error
-      } 
-      if (error.request) {
-        console.log('%c⧭', 'color: #ff0000', 'No se recibió respuesta del servidor');
-        return 'timeout'
-      } 
-  
-      console.log('%c⧭', 'color: #9c66cc', error.message);
       return error
     }
   );

@@ -1,3 +1,4 @@
+import { showError } from "@/helper/toast"
 import axios from "axios"
 import { createContext, useContext, useEffect, useState } from "react"
 import debounce from "../helper/debounce"
@@ -35,6 +36,16 @@ export default function LoaderProvider(props: Props) {
     show()
     return config
   })
+
+  axios.interceptors.response.use(
+    (r) => r,
+    (error) => {
+      if (error?.response?.status === 400 && error?.response?.data?.message) {
+        showError(error?.response?.data?.message)
+      }
+      return error;
+    }
+  )
   return (
     <LoaderContext.Provider value={value}>
       {props.children}
