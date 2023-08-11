@@ -2,3 +2,9 @@
   padding: var(--gap);
   background: var(--bg-1);
 }
+
+@media screen and (max-width: 550px) {
+  .transactionChart {
+    display: none;
+  }
+}

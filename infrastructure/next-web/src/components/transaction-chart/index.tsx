@@ -17,7 +17,7 @@ import { useT } from "../../provider/language-context"
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 function TransactionChart() {
-  const t = useT();
+  const t = useT()
   const { userDetail } = useUserDetail()
   if (!userDetail?.account) return
   if (!userDetail.account.transactions?.length) return
@@ -27,8 +27,10 @@ function TransactionChart() {
     labels: transactions.map((transaction) => formatDate(transaction.createdAt)),
     datasets: [
       {
-        label: t('chart_title'),
-        data: transactions.map((transaction) => transaction.type === 'WITHDRAWAL' ? -transaction.amount : transaction.amount),
+        label: t("chart_title"),
+        data: transactions.map((transaction) =>
+          transaction.type === "WITHDRAWAL" ? -transaction.amount : transaction.amount
+        ),
         fill: false,
         borderColor: "#111D4A",
         backgroundColor: "#111D4A",
@@ -36,17 +38,19 @@ function TransactionChart() {
     ],
   }
 
-
   return (
-    <div className={styles.transactionChart} style={{}}>
-      <Line data={data} options={{
-        scales: {
-        xAxis: {
-          position: 'top',
-          reverse: true
-        }
-        }
-      }} />
+    <div className={styles.transactionChart}>
+      <Line
+        data={data}
+        options={{
+          scales: {
+            xAxis: {
+              position: "top",
+              reverse: true,
+            },
+          },
+        }}
+      />
     </div>
   )
 }
